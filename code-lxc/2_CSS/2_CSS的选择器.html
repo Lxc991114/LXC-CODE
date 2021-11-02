@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS的选择器</title>
+    <style>
+        /*  1.常见的选择器 */
+        /* (1)通配符选择器 */
+        * {
+            color: darkturquoise;
+        }
+
+        /* (2)标签选择器 */
+        h1 {
+            background-color: deeppink;
+            width: 300px;
+            height: 100px;
+            text-align: center;
+        }
+
+        img {
+            width: 300px;
+        }
+
+        span {
+            display: block;
+            /*将行级元素变成块级元素*/
+        }
+
+        /* (3)类选择器 */
+        .cake {
+            background-color: gold;
+            width: 200px;
+        }
+
+        /* (4)id选择器 */
+        #cry {
+            background-color: hotpink;
+            border: 1px solid #000000;
+        }
+
+        /* 2.常见关系选择器 */
+        /* （1）后代选择器 */
+        .div1 p {
+            color: hotpink;
+        }
+
+        /* （2）子代选择器 */
+        .div1>p {
+            border: 5px solid #ff0000;
+        }
+
+        /* 3.常见属性选择器 */
+        /* （1）选择所有带该属性的标签 */
+        input[name] {
+            background-color: indianred;
+        }
+
+        /* （2）选择所有带该属性且属性值为某某的标签 */
+        input[name="green"] {
+            background-color: indigo;
+        }
+
+        /* 4.常见伪类选择器 */
+        /* （1）标签:hover */
+        a:hover {
+            color: lightcoral;
+        }
+
+        /* (2)标签:first-child/标签:last-child:选中该标签父元素下面的第一个该元素/最后一个元素 */
+        ol:first-child {
+            background-color: lightpink;
+        }
+
+        li:last-child {
+            background-color: lightseagreen;
+        }
+
+        p i:first-child {
+            /* 所有p下第一个i */
+            color: lime;
+        }
+
+        /* （3）标签:nth-child(n): 选中该标签父元素下面的第n个该元素，如果第n个元素与该标签相同则选中，否则不选中，n可以为0*/
+        .aa p:nth-child(2) {
+            color: #ff0000;
+        }
+
+        .aa p:nth-child(3) {
+            color: blue;
+        }
+
+        /* 5.常见的伪元素选择器 */
+        /* （1）标签::before/标签::after:在该标签内部的最上面或最下面插入一个行元素 */
+        ul::before {
+            content: "11111";
+            color: blueviolet;
+        }
+
+        /* 6.分组选择器：将多个选择器拿逗号连接一同更改样式 */
+
+        /* CSS选择器的解析顺序是从右往左的，如果是P.aa则说明找到所有class是aa的p标签 */
+
+        /* 选择器的优先级(由高到低)：
+        （1）！important
+        （2）内联选择器(直接写在标签内部的样式)
+        （3）id选择器
+        （4）类选择器、属性选择器、伪类选择器
+        （5）标签选择器、伪元素选择器
+        */
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <img src="../img/cake.JPG">
+            <h1>今天的蛋糕特别好吃</h1>
+            <h2 class="cake">今天的蛋糕是草莓味的</h2>
+            <h3 class="cake">今天一定要买蛋糕哦</h3>
+            <h4 id="cry">不买蛋糕我就要哭了</h4>
+            <h5>快买蛋糕</h5>
+            <p id="buy">这么好吃的蛋糕一定不要错过</p>
+        </div>
+        <div class="div1">
+            <p>好的呢</p>
+            <div>
+                <p>不会错过的</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="text" name="">
+        <input type="text" name="">
+        <input type="text">
+        <input type="text" name="green">
+        <input type="text" name="green">
+    </div>
+    <div>
+        <a href="#">这是可以购买蛋糕的链接</a>
+    </div>
+    <div>
+        <ol type="A">
+            <li>🍑</li>
+            <li>🍑</li>
+        </ol>
+        <p>桃子的<i>蛋糕</i>也很好吃</p>
+        <p>苹果的<i>蛋糕</i>也很好吃</p>
+    </div>
+    <div class="aa">
+        <p>第一个p</p>
+        <p>第二个p</p>
+        <span>第一个span</span>
+        <span>第二个span</span>
+        <p>第三个p</p>
+        <p>第四个p</p>
+    </div>
+
+    <div>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+        </ul>
+    </div>
+
+
+    <script>
+        // 使用js中的style.xxx的语法为元素添加内联样式
+        document.getElementById('buy').style.background = 'yellow';
+        document.getElementById('buy').style.color = 'red';
+    </script>
+
+
+</body>
+
+</html>

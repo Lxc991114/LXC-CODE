@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS编写位置</title>
+    <!-- 内部外部样式，谁后执行谁覆盖前面
+        若要强制改变哪个样式的优先级，就在具体要改变的那个样式的后面
+        加一个！import
+    -->
+
+    <!-- 外联样式 -->
+    <!-- link标签可以引入外部样式还可以引入小图标 -->
+    <link rel="stylesheet" href="HtmlCss.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/water.JPG">
+    <!-- 内部样式 --> <!-- 一般使用内部样式 -->
+    <style>
+        h2 {
+            background-color: crimson;
+            color: cyan;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a href="../img/cake.JPG"></a>
+        <!-- 内联样式 -->
+        <h1 style="background-color: chartreuse;color: chocolate;">这是一块很好吃的蛋糕</h1>
+        <h2>这是一块很好吃的蛋糕</h2>
+        <h3>这是一块很好吃的蛋糕</h3>
+    </div>
+    
+</body>
+
+</html>

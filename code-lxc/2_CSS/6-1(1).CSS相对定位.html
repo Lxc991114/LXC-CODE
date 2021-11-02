@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相对定位</title>
+    <style>
+        /* （2）relative：相对定位(设置值之后位置会发生变化，相对自己最初的位置，原本占据的空间不释放) */
+        .re {
+            width: 400px;
+            height: 400px;
+            background-color: aquamarine;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            /* 将块元素变成行元素并且具备块元素的特征，如果使用display: inline时div内没内容，根据行元素特征，则会不显示背景颜色*/
+        }
+
+        .div1 {
+            background-color: yellow;
+        }
+
+        .div2 {
+            background-color: tomato;
+            position: relative;
+            /* 向右移动20px、向下移动50px */
+            left: 20px;
+            top: 50px;
+        }
+
+        .div3 {
+            background-color: violet;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="re">
+        <div class="div1">div1</div>
+        <div class="div2">div2</div>
+        <div class="div3">div3</div>
+    </div>
+</body>
+
+</html>

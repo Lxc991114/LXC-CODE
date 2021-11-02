@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三列布局</title>
+    <style>
+        /* 两侧固定，中间自适应 */
+        .left {
+            width: 200px;
+            height: 500px;
+            background-color: wheat;
+            float: left;
+        }
+
+        .center {
+            height: 500px;
+            background-color: turquoise;
+            /* 防止左右释放空间后，中间被左右盖住一部分 */
+            margin-left: 205px;
+            margin-right: 205px;
+        }
+
+        .right {
+            width: 200px;
+            height: 500px;
+            background-color: yellowgreen;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left"></div>
+    <!-- 中间和右侧换位置的原因是，左侧浮动释放空间，右侧浮动释放空间，然后中间便自适应了 -->
+    <div class="right"></div>
+    <div class="center"></div>
+</body>
+
+</html>

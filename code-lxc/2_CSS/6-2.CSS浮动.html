@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS浮动</title>
+    <style>
+        /* float三个值：left、right、none */
+        div {
+            width: 200px;
+            height: 200px;
+            float: left;
+        }
+
+        .f1 {
+            background-color: turquoise;
+        }
+
+        .f2 {
+            background-color: tomato;
+        }
+
+        .f3 {
+            background-color: yellow;
+        }
+
+        /* 不让div4浮动上去
+        （1）clear: left;——因为div1、div2、div3都是左浮释放的空间，所以可以给div4清除左浮动
+        （2）clear: both;——若不知道上面是左浮动右浮动，干脆清除左右浮动
+        */
+        h1 {
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="f1">div1</div>
+    <div class="f2">div2</div>
+    <div class="f3">div3</div>
+    <h1>div4</h1>
+</body>
+
+</html>

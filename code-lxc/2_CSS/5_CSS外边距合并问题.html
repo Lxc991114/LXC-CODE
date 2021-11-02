@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS外边距合并问题</title>
+    <style>
+        /* 建议在最开始使用清除浏览器自带的样式
+    * {
+            margin:0;
+            padding:0;
+            border:0;
+       }
+        */
+
+        /* 1.当两个块元素上下分布时：都设置了外边距时，会进行合并，以较大的外边距为准 */
+        #box1 {
+            width: 500px;
+            height: 500px;
+            background-color: slategrey;
+        }
+
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: springgreen;
+            margin-bottom: 20px;
+        }
+
+        .box2 {
+            width: 200px;
+            height: 200px;
+            background-color: violet;
+            margin-top: 50px;
+        }
+
+        /* 2.当两个块元素父子嵌套时:没有！内边距或边框！把外边距分隔开,都设置了同一方向外边距时，会进行合并，以较大的外边距为准 */
+        #box3 {
+            width: 500px;
+            height: 500px;
+            background-color: yellow;
+        }
+
+        .box4 {
+            width: 200px;
+            height: 200px;
+            background-color: springgreen;
+            margin-top: 20px;
+        }
+
+        .box5 {
+            width: 100px;
+            height: 100px;
+            background-color: tomato;
+            margin-top: 50px;
+        }
+
+
+        /* 重点.让给子元素向父元素下移动一些距离
+        解决方法1: 给子元素设上外边距——不可行(不会使得子元素与父元素上面产生外边距，而是整体产生上外边距并合并,子元素不会下移)
+        解决方法2：给父元素加上内边距——不可行(给元素加背景的时候会覆盖到border、magin、padding，不只是给内容加上了背景，父元素会变长)
+        解决方法3：给父元素加边框——不太行(可能不想要这个边框，哪怕是透明的也有影响)
+        解决方法4：浮动——不太行(浮动后会释放空间，如果后面还有元素的话，后面的元素会跑到上面去)
+        解决方法5：给父元素加一句overflow: hidden——目前可以很好解决外边距合并问题之一的办法(会使父元素打开独立的页面渲染的空间，不和其他元素互相影响)
+                  （overflow: hidden本身是做溢出隐藏的
+                  例：标签div3设置了宽和高，但是里面的内容过于多，溢出了这个div3盒子，则给div3加一句overflow: hidden则可以将溢出部分隐藏）
+        */
+    </style>
+
+</head>
+
+<body>
+    <div id="box1">
+        <div class="box1"></div>
+        <div class="box2"></div>
+    </div>
+    <div id="box3">
+        <div class="box4">
+            <div class="box5"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

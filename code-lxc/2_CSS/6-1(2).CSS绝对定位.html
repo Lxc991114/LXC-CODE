@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绝对定位</title>
+    <style>
+        /* （3）absolute：绝对定位(设置值之后位置会发生变化，相对最近的已定位的父元素，没有定位的父元素则相对body，原本占据的空间释放) */
+        .ab {
+            width: 400px;
+            height: 400px;
+            background-color: violet;
+            /* 让外边的块移动，观察绝对定位 */
+            margin-left: 200px;
+            margin-top: 100px;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+        }
+
+        .div3 {
+            background-color: rgb(0, 255, 242);
+            position: absolute;
+            left: 20px;
+            top: 80px;
+        }
+
+        .div4 {
+            background-color: rgb(255, 71, 111);
+        }
+
+        .div5 {
+            background-color: rgb(228, 38, 228);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ab">
+        <div class="div3">div3</div>
+        <div class="div4">div4</div>
+        <div class="div5">div5</div>
+    </div>
+</body>
+
+</html>

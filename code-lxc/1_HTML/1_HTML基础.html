@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 浏览器搜索的时候出现的关键词和对应的描述 -->
+    <meta name="keywords" content="T恤, 卫衣, 牛仔裤">
+    <meta name="description" content="我们是中国专业的服装制造商...">
+    <title>HTML、CSS标签练习</title>
+</head>
+<body>
+    <!-- html中的注释只有这一种写法 -->
+    <!-- 一.常见行元素：水平排列，不可设置宽和高，宽度由内容确定 -->
+    <span>这是一小段文本</span>
+    <a href="http://www.baidu.com">百度</a>
+    <i>这是一个斜体标签</i><!-- 斜体不加粗 -->
+    <em>语气强硬的标签</em><!-- 斜体不加粗 -->
+    <strong>语气更强硬的标签</strong><!-- 不斜体加粗——强调时一般用strong -->
+    <img src="../img/cake.JPG" width="200" height="200">
+
+    <!-- 二.常见块元素：垂直排列，可设置宽和高 -->
+    <!-- 1.基础块元素 -->
+    <h1>这是第一个标题</h1><!-- h1-h6从大到小 -->
+    <p>
+        春眠不觉晓，
+          处处闻啼鸟。
+            夜来风雨声，
+              花落知多少。
+    </p><!-- 别使用空的段落标记去插入一个空行，用 <br/> 标签代替它 -->
+    <ol>
+        <li>有序列表</li>
+        <li>有序列表</li>
+    </ol>
+    <ul>
+        <li>无序列表</li>
+        <li>无序列表</li>
+    </ul>
+        <div>
+            <div>div主要是给网页布局使用</div>
+        </div>
+    <!-- 2.表单元素 -->
+    <!-- (1)单选框 -->
+    <input type="text">
+    <!-- (2)密码框 -->
+    <input type="password">
+    <!-- (3)单选框：name属性值一致时才可以二选一!!!!!!! -->
+    <input type="radio" name="sex">🚹
+    <input type="radio" name="sex">🚺
+    <!-- (4)多选框：最好用name属性进行限制!!!!!!! -->
+    <input type="checkbox" name="hobby">唱歌
+    <input type="checkbox" name="hobby">跳舞
+    <input type="checkbox" name="hobby">弹琴
+    <!-- (5)下拉选择框 -->
+    <select name="" id="">
+        <!-- value的属性值最好写着，便于后续 -->
+        <option value="heilongjiang">黑龙江</option>
+        <option value="jilin">吉林</option>
+        <option value="liaoning">辽宁</option>
+    </select>
+    <!-- (6)多行文本框：如果在标签中写字会默认出现在文本框里 -->
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <!-- （7）按钮 -->
+    <button>点到谁谁上岸</button>
+
+    <!-- 三.br标签和hr标签 -->
+        <!-- 使用水平线来分隔文章中的小节是其中一个办法 -->
+    <hr/>
+        <!-- br是换行标签：即使 <br> 在所有浏览器中都是有效的，但使用 <br /> 是更长远的保障 -->
+    <p>
+        那就是<br/>青藏高原
+    </p>
+
+    <!-- 四.HTML的style属性；提供了一种改变所有HTML元素的样式的通用方法 -->
+    <!-- 1.background-color --> 
+    <div style="background-color: aqua;">background-color属性</div>
+    <!-- 2.font-family、color 以及 font-size 属性 --> 
+    <p style="font-family: 'Courier New', Courier, monospace; color: blueviolet; font-size: 80px;">字体样式</p>
+    <p style="font-family: 'Courier New', Courier, monospace; color: rgb(43, 226, 119); font-size: smaller;">字体样式</p>
+    <!-- 3.text-align  -->
+    <h1 style="text-align: center;">居中对齐</h1>
+
+    <!-- 五.常用的HTML的文本格式化标签 -->
+    <!-- 1.标签 -->
+    <b>LXC</b>
+    <strong>LXC</strong>
+    <em>LXC</em>
+    <big>LXC</big>
+    <small>LXC</small>
+    <!-- 2.保留格式的pre标签-->
+    <pre>
+       这是一个
+             积极的
+        打工人
+    </pre>
+    <!-- 3.上下脚标 -->
+    文章内容
+   <sub>a</sub>
+    文章内容
+   <sup>b</sup>
+
+   <!-- 六.HTML颜色由一个十六进制符号来定义，这个符号由红色、绿色和蓝色的值组成（RGB）
+           每种颜色的最小值是 0（十六进制：#00）。最大值是 255（十六进制：#FF）
+           黑色：#00000 rgb(0,0,0)
+           白色：#FFFFFF rgb(255,255,255)
+    -->
+
+   <!-- 七.有序列表和无序列表的延伸:type属性 -->
+   <ul type="circle">
+       <li>🍎</li>
+       <li>🍐</li>
+   </ul>
+   <ol type="A">
+       <li>🍌</li>
+       <li>🍇</li>
+   </ol>
+
+   <!-- 八.表格 -->
+   <!-- 1.常规 -->
+   <table border="1">
+       <tr>
+           <td>1</td>
+           <td>2</td>
+       </tr>
+       <tr>
+           <td>3</td>
+           <td>4</td>
+       </tr>
+   </table>
+   <!-- 2.空一格：有时候可能空的那格显示的和别的不一样所以最好用空格占位符 -->
+   <table border="1">
+    <tr>
+        <td>1</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+    </table>
+
+    <!-- 九. div和span：div可做容器；span可做分节的功能，一般用div布局而不用table布局 -->
+     <h1>我<span>最爱的</span>爸妈</h1>
+     <div>
+        <a href="">链接</a>
+        <p>段落</p>
+     </div>
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>固定定位</title>
+    <style>
+        /*（4）fixed：固定定位(永远相对于浏览器视口定位，元素固定定位后，宽度由内容撑开) */
+        body{
+            height: 2000px;/* 出现滚动条 */
+            margin: 0;/* 去掉浏览器给body带的margin */
+        }
+        div{
+            height:50px ;
+            background-color: violet;
+            padding: 50px;
+            position: fixed;/* 宽度由内容撑开了 */
+            left: 0;
+            top: 0;
+            /* 想让div整个撑开 */
+            /* 解决方法：
+            （1）width：100%——横向出现了滚动条/审查元素可发现内容超出了浏览器(光是一个内容就占了100%，再加上设置的内边距就超出了浏览器的范围)
+            （2）width：auto——不可行，默认就是auto
+            （3）width：100% + box-sizing: border-box;——可行(可使整个元素充满浏览器，而不是光内容就充满了浏览器)
+            */
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">这是一个固定条</div>
+</body>
+</html>

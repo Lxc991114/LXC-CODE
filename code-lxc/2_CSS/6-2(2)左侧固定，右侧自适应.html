@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两列布局</title>
+    <style>
+        /* 左侧固定，右侧自适应 */
+        .left{
+            width: 200px;
+            height: 500px;
+            background-color: yellow;
+            float: left;
+        }
+        .right{
+            /* 自适应部分不可以设宽 */
+            height: 500px;
+            background-color: violet;
+            /* 为了不使右侧的藏在左侧下面一部分，使用margin-left，并使其值略大于左侧的宽 */
+            margin-left: 205px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left"></div>
+    <div class="right"></div>
+</body>
+
+</html>

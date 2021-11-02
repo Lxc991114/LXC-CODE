@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS盒模型</title>
+    <style>
+        /* ⚠：
+        行元素：margin、padding、border只能让元素在水平方向产生间隙，垂直方向不可以
+        块元素：margin、padding、border只能让元素在水平方向和垂直方向都产生间隙
+        */
+
+        /* 
+        1.盒模型：网页中所有元素都是一个框，所有元素都遵循盒模型
+            （1）margin(为了元素间产生间隙)（2）padding(内容和边产生间隙)（3）border（4）content 
+        */
+        .common {
+            width: 500px;
+            height: 500px;
+            background-color: cornflowerblue;
+            margin: 20px 30px 40px 50px;
+            padding: 5px 5px 5px 5px;
+            border: 30px solid rgb(233, 107, 233);
+        }
+
+        /* 2.标准盒模型(W3C盒模型)：width(height)就是内容的宽度(高度)：不包含padding和border和magin  */
+        .standard {
+            background-color: seagreen;
+        }
+
+        .box1 {
+            background-color: skyblue;
+            width: 400px;
+            height: 300px;
+            margin: 20px 30px 40px 50px;
+            padding: 30px;
+            border: 10px solid slateblue;
+        }
+
+        /* 3.怪异盒模型(IE浏览器)：width(height)就是内容的宽度(高度)加padding和border，不加magin(magin是在视觉之外的) */
+        .monstrous {
+            background-color: seagreen;
+        }
+
+        .box2 {
+            background-color: skyblue;
+            width: 400px;
+            height: 300px;
+            margin: 20px 30px 40px 50px;
+            padding: 30px;
+            border: 10px solid slateblue;
+            box-sizing: border-box;
+            /* 将标准盒模型变成怪异盒模型 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="common">
+        这是一个普通盒子
+    </div>
+    <div class="standard">
+        <div class="box1"> 这是一个标准盒模型 </div>
+    </div>
+    <div class="monstrous">
+        <div class="box2">这是一个怪异盒模型</div>
+    </div>
+</body>
+
+</html>

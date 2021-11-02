@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS的常见样式</title>
+    <style>
+        /* 🍎1.颜色 */
+        /* （1）固定颜色 */
+        .a {
+            color: red;
+        }
+
+        /* （2）RGB/RGBA(A为透明度)：取值范围(0~255)/(0%~100%),透明度(0~1),完全不透明~完全透明，全0是黑，反之是白*/
+        .b {
+            color: rgba(179, 99, 71, 0.5);
+        }
+
+        /* (3)hex:16进制，transparent是透明色 */
+        .c {
+            color: #0f0;
+        }
+
+        /* 🍎2.单位(chrome字体默认是16px，最小为12px) */
+        .unit {
+            background-color: slategray;
+            width: 1500px;
+            height: 1500px;
+            font-size: 2px;
+        }
+
+        /* （1）px */
+        .d {
+            background-color: rosybrown;
+            width: 100px;
+            height: 100px;
+            font-size: 25px;
+        }
+
+        /* (2)%(是父元素的百分之多少) */
+        .e {
+            background-color: royalblue;
+            width: 50%;
+            height: 50%;
+        }
+
+        /* （3）em(相对于父元素的font-size) 假设父元素字体大小为apx，则10rem=10apx
+               没有指定字体大小，浏览器中的默认文本大小为 16px。因此，默认大小 1em 为 16px
+               若使用 em 尺寸，则可以在所有浏览器中调整文本大小
+        */
+        .f {
+            background-color: springgreen;
+            font-size: 50em;
+        }
+
+        /* （4）rem(相对于html根元素的font-size) 假设根元素字体大小为apx，则10rem=10apx*/
+        .g {
+            background-color: tomato;
+            width: 20rem;
+            /* 宽、高也按根元素的字体大小算 */
+            font-size: 4rem;
+        }
+
+        /* （5）vw、vh(相对于viewport的百分之多少):响应式字体大小,1vw = 视口宽度的 1％ */
+        .h {
+            background-color: yellow;
+            width: 30vw;
+            height: 5vh;
+        }
+
+        /* 以 ％ （可以是body）和 em（可以是子标签）中设置字体大小会在所有主要浏览器中显示相同的大小，并允许所有浏览器调整文本大小 */
+
+        /* 🍎3.背景：给元素加背景的时候会覆盖到border、magin、padding，不只是给内容加上了背景
+                     但是body比较特殊，给body设背景颜色，背景颜色也会覆盖浏览器自动给body的8px外边距
+                     如果给body的外边距一个margin:0，内容就充满浏览器了 
+        */
+        /* （1）背景颜色 */
+        .aa {
+            width: 100px;
+            height: 100px;
+            background-color: violet;
+        }
+
+        /* （2）背景图片路径 */
+        .bb {
+            width: 800px;
+            height: 800px;
+            background-image: url("../img/cake.JPG");
+        }
+
+        /* （3）背景重复:默认情况下，background-image属性在水平和垂直方向上都重复图像 */
+        body {
+            background-image: url("../img/water.JPG");
+            background-repeat: repeat;
+        }
+
+        /* （4）背景位置 */
+        .cc {
+            width: 500px;
+            height: 500px;
+            background-image: url(../img/logo.png);
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+
+        /* （5）背景大小：常用数字、百分比、cover(整个图覆盖背景)和contain(图的长和宽恰好等于背景) */
+        .dd {
+            width: 700px;
+            height: 500px;
+            background-color: greenyellow;
+            background-image: url(../img/logo.png);
+            background-size: cover;
+        }
+
+        .ee {
+            width: 900px;
+            height: 500px;
+            background-color: rgb(231, 218, 218);
+            background-image: url(../img/logo.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        /* (6) rgba中a与opacity属性的区别:
+        rgba只会让元素背景透明，不会影响子元素
+        opacity会使子元素也变透明
+        */
+        .ff {
+            width: 500px;
+            height: 500px;
+            background-color: rgba(0, 123, 232, 0.315);
+        }
+
+        .fff {
+            width: 300px;
+            height: 300px;
+            background-color: rosybrown;
+        }
+
+        .gg {
+            width: 500px;
+            height: 500px;
+            background-color: salmon;
+            opacity: 0.5;
+        }
+
+        .ggg {
+            width: 300px;
+            height: 300px;
+            background-color: rosybrown;
+        }
+
+        /* （7）合并写法:顺序不可变 */
+        .hh {
+            width: 500px;
+            height: 500px;
+            background: #ffffff url("../img/logo.png") no-repeat right top;
+            ;
+        }
+
+        /* 🍎4.边框：除非设置了 border-style 属性，否则其他 CSS 边框属性都不会有任何作用 */
+        /* （1）边框样式、宽度、颜色 */
+        .aaa {
+            border-style: dotted dashed solid double;
+            border-width: 25px 10px 4px 35px;
+            /* 上边框 25px，右边框 10px，下边框 4px，左边框 35px */
+            border-color: red;
+        }
+
+        /* （2）边框的合并写法:大小、样式(必须有)、颜色 */
+        .bbb {
+            border: 2px solid wheat;
+        }
+
+        /* （3）圆角边框:border-radius值越大，圆角幅度越大 */
+        .ccc {
+            border: 3px solid violet;
+            border-radius: 5px;
+        }
+
+        /* 🍎5.文本和文字 */
+        /* （1）文本颜色：设置文字颜色属于text文本相关属性 */
+        .aaaa {
+            color: violet;
+        }
+
+        /* (2)文本对齐方式：left/center/right/justify */
+        .bbbb {
+            border: 4px solid rgba(178, 287, 123);
+            text-align: center;
+        }
+
+        .cccc {
+            border: 4px solid #0000ff;
+            width: 200px;
+            height: 270px;
+            text-align: justify;
+            /*  属性设置为 "justify" 后，将拉伸每一行，以使每一行具有相等的宽度，并且左右边距是直的 */
+        }
+
+        /* (3)文本缩进：首行文本缩进 */
+        p {
+            text-indent: 30px;
+        }
+
+
+        /* (4)文本装饰 */
+        h1 {
+            color: white;
+            text-decoration: none;
+        }
+
+        h2 {
+            color: white;
+            text-decoration: underline;
+        }
+
+        h3 {
+            color: white;
+            text-decoration: overline;
+        }
+
+        h4 {
+            color: white;
+            text-decoration: line-through;
+        }
+
+        /* (5)行高(行间距) */
+        .small {
+            line-height: 0.8;
+        }
+
+        .big {
+            line-height: 1.8;
+        }
+
+        /* （6）(一行)行级元素垂直、水平居中最常用方法：先将行高与高设成一致，再将文本居中,多行不可用 */
+        .line {
+            width: 500px;
+            height: 500px;
+            border: 4px solid black;
+            line-height: 500px;
+            /* 垂直贴左边居中 */
+            text-align: center;
+        }
+
+        /* （7）块级元素水平方向垂直居中:宽度小于父元素的宽度即可生效!! */
+        .block span {
+            display: block;
+            /* 行元素变块元素 */
+            background-color: burlywood;
+            width: 150px;
+            margin: 0 auto;
+        }
+
+        .contain {
+            width: 200px;
+            height: 200px;
+            background-color: blueviolet;
+            margin: 0 auto;
+            /* 水平贴上边居中 */
+        }
+
+        .block {
+            width: 500px;
+            height: 500px;
+            border: 4px solid rgba(0, 123, 232, 0.315);
+        }
+
+        /* (8)字体 */
+        .font {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: 200px;
+            font-size: larger;
+            font-style: italic;
+            color: cadetblue;
+        }
+
+        /* 🍎6.列表相关 */
+        ul {
+            list-style: url(../img/logo.png);
+        }
+
+        /* 🍎width：100%与width：auto：
+        （1）width：100%——相对于父元素，如果超出页面，会有滚动条
+        （2）width：auto——默认就是auto；auto不是100%等于父元素，如果有溢出，会挤一挤
+        */
+
+    </style>
+
+</head>
+
+<body>
+    <div class="color">
+        <div class="a">这是红色的</div>
+        <div class="b">这是略透明的粉色</div>
+        <div class="c">这是绿色的</div>
+    </div>
+
+    <div class="unit">
+        这是一个大块块
+        <div class="d">这是一个用px的块块</div>
+        <div class="e">这是一个用%的块块</div>
+        <div class="f">这是一个用em的块块</div>
+        <div class="g">这是一个用rem的块块</div>
+        <div class="h">这是一个用vw、vh的块块</div>
+    </div>
+
+    <div class="background">
+        <div class="aa">背景颜色看这个</div>
+        <div class="bb"></div>
+        <div class="cc"></div>
+        <div class="dd"></div>
+        <div class="ee"></div>
+        <div class="ff">
+            <div class="fff"></div>
+        </div>
+        <div class="gg">
+            <div class="ggg"></div>
+        </div>
+        <div class="hh"></div>
+    </div>
+
+    <div class="border">
+        <div class="aaa">边框样式</div>
+        <div class="bbb">边框样式合并写法</div>
+        <div class="ccc">圆角边框</div>
+    </div>
+
+    <div class="text">
+        <div class="aaaa">彩色的文本</div>
+        <div class="bbbb">这段文本居中对齐</div>
+        <div class="cccc">In my younger and more vulnerable years my father gave me some advice that I've been turning
+            over in my mind ever since. 'Whenever you feel like criticizing anyone,' he told me, 'just remember that all
+            the people in this world haven't had the advantages that you've had.'
+        </div>
+        <p>In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind
+            ever since. 'Whenever you feel like criticizing anyone,' he told me, 'just remember that all the people in
+            this world haven't had the advantages that you've had.'
+        </p>
+        <div>
+            <h1>文本无装饰</h1>
+            <h2>文本有下划线</h2>
+            <h3>文本有上划线</h3>
+            <h4>文本有删除线</h4>
+        </div>
+        <div class="small">
+            <div>这是间距小的段落</div>
+            <div>这是间距小的段落</div>
+        </div>
+        <p>这是个间隔</p>
+        <div class="big">
+            <div>这是间距大的段落</div>
+            <div>这是间距大的段落</div>
+        </div>
+
+        <div class="line">
+            <span>行元素</span>
+            <span>行元素</span>
+            <span>行元素</span>
+        </div>
+        <div class="block">
+            <div class="contain">
+                <span>行元素变块元素</span>
+                <span>行元素变块元素</span>
+            </div>
+        </div>
+    </div>
+    <div class="font">对字体进行操作</div>
+    <ul>
+        <li>苹果</li>
+        <li>梨</li>
+        <li>橘子</li>
+    </ul>
+</body>
+
+</html>
