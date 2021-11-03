@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用Array、Math内置对象中的方法乱序输出一个数组</title>
+</head>
+
+<body>
+    <script>
+        var arr = [3, 22, 8, 12, 6, 11, 4];
+        arr.sort(function () {//sort:排序方法
+            return Math.random() - 0.5;//radom:产生随机数方法
+        })
+        console.log(arr);
+    </script>
+
+</body>
+
+</html>

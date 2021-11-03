@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arguments参数和立即函数</title>
+</head>
+
+<body>
+    <script>
+        /* 1.arguments参数：用来接收所有实参的数组，所有实参都会默认存在数组里 */
+        /* (1)不使用arguments参数 */
+        function fn1(name, age) {
+            console.log(name, age);//lisi undefined
+        }
+        fn1('lisi');
+
+        function fn2(name, age) {
+            console.log(name, age);//lisi 12
+        }
+        fn2('lisi', 12, 170);
+        /* (2)使用arguments参数 */
+        function fn3() {
+            console.log(arguments[0], arguments[1], arguments[2]);
+        }
+        fn3('lkx', 20010408, '男');
+
+        /* 2.arguments.callee：用来在函数内部取代函数本身(不推荐使用，MDN中显示ejs5以后的严格模式中被删除) */
+        //例：求第N项斐波那契数列的值,斐波那契数列(前两个数是1，以后的每一个数都是前两个数的和)
+        /*(1)使用递归编写一个斐波那契函数*/
+        function fn4(n) {
+            if (n <= 2) {
+                return 1;
+            } else {
+                return fn4(n - 1) + fn4(n - 2);
+            }
+        }
+        console.log(fn4(5));
+        /*(2)使用递归和arguments.callee编写一个斐波那契函数
+            可以防止函数名改变的时候多处修改函数名 */
+            function fn5(n) {
+            if (n <= 2) {
+                return 1;
+            } else {
+                return arguments.callee(n - 1) + arguments.callee(n - 2);
+            }
+        }
+        console.log(fn5(5));
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

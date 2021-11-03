@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改变this指向的方法</title>
+</head>
+
+<body>
+    <button id="btn">点击按钮想要this指向window</button>
+    <button id="btn1">点击按钮想要this指向按钮</button>
+    <button id="btn2">点击按钮想要this指向按钮</button>
+    <button id="btn3">点击按钮想要this指向按钮</button>
+    <script>
+        /* 改变this指向的方法 */
+
+        /* （1）call、apply、bind */
+        var o1 = {
+            name: 'lisi',
+            age: 23
+        };
+        function test(name, age) {
+            console.log(this);
+        }
+
+        test('lisi', 12);
+        test.call(o1, 'lisi', 12);
+        test.apply(o1, ['lisi', 12]);
+        test.bind(o1)();
+
+        /* （2）让this指向按钮而不是window */
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            setTimeout(function () {
+                console.log(this);//window
+            }, 1000);
+        }
+        //缓存this的办法
+        var btn1 = document.getElementById('btn1');
+        btn1.onclick = function () {
+            var that = this;
+            setTimeout(function () {
+                console.log(that);//按钮
+            }, 1000);
+        }
+        //bind的办法
+        var btn2 = document.getElementById('btn2');
+        btn2.onclick = function () {
+            setTimeout(function () {
+               console.log(this, 'btn2');
+            }.bind(btn2), 3000);//此处bind(btn2)后面不需要手动调用，因为定时器将在3s后调用
+        }
+        //为什么不可以使用call、apply：
+        var btn3 = document.getElementById('btn3');
+        btn3.onclick = function () {
+            var fn = function(){
+                console.log(this ,'btn3');
+            };
+            setTimeout(fn.call(btn), 3000);//使用call、apply会直接调用，不会等计时器来调用
+        }
+
+        
+
+
+
+
+    </script>
+
+</body>
+
+</html>

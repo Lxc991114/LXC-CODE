@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义对象</title>
+</head>
+
+<body>
+    <script>
+        /* 创建对象的方法:两种方式完全一致 */
+        /* （1）new Object() */
+        var obj1 = new Object();
+        obj1.name = 'lisi';
+        obj1.age = 14;
+        obj1.sayHellow = function (name) {
+            console.log(name);
+        }
+        obj1.sayHellow('lity');//调用方法
+        console.log(obj1.name);//读取属性
+        obj1.age = 15;//更改属性
+        console.log(obj1.age);
+
+        /* （2）{}对象直接量：建议使用该方法 */
+        var obj2 = {
+            name: 'sasa',
+            age: 14,
+            sayBye: function () {
+                console.log('byebye');
+            }
+        }
+        obj2.sayBye();
+
+        /* （3）涉及到原型的创建方式————很复杂，后续再研究 */
+
+        /* （4）new 类() */
+        //定义一个类
+        class Cat {
+            name = 'mimi';
+            age = 14;
+            //构造函数
+            constructor(name,age){
+                //将类中的属性改成传过来的实参
+                this.name = name;
+                this.age = age;
+
+            }
+            //类中的方法
+            eat(){
+                console.log('吃饭');
+
+            }
+        }
+
+        //创建一个具体的实例对象:
+        var cat = new Cat('ketty',12);//实例对象就是对类中构造函数的调用
+        console.log(cat.name,cat.age);
+        cat.eat();//实例对象.方法()就是对类中方法的调用
+
+
+
+    </script>
+</body>
+
+</html>

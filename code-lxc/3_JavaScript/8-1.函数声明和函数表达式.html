@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数声明和函数表达式</title>
+</head>
+
+<body>
+    <script>
+        /* 1.函数声明：会函数提升 */
+        /* （1）无返回值时 */
+        function fn1(name, sex) {
+            console.log(name, sex);
+        }
+        fn1('lisi', '男');
+        /* （2）有返回值时：根据具体情况看是否需要返回值 */
+        function fn2(home, road) {
+            return "她的" + home + "在第" + road + "条路上";
+        }
+        var a = fn2('别墅', '4')//将输入实参后得到的返回值赋值给了a
+        console.log(a);
+        /* （3）函数提升问题的实例：可以先调用再声明 */
+        f3();
+        function f3() {
+            console.log('函数声明的方式函数会提升');
+        }
+
+        /* 2.函数表达式 */
+        /* （1）无返回值时 */
+        var fn4 = function (name, age) {
+            console.log(name, age);
+        }
+        fn4('lisi', 12);
+        /* （2）有返回值时：根据具体情况看是否需要返回值 */
+        var fn5 = function (name, age) {
+            return name + '已经' + age + '岁';
+        }
+        var b = fn5('zhaohua', 13);
+        console.log(b);
+        /* （3）函数表达式不可提升 */
+        fn6();
+        var fn6 = function () {
+            console.log('函数表达式的方式函数不可提升');//会报错：fn6不是函数
+        }
+
+
+    </script>
+
+</body>
+
+</html>

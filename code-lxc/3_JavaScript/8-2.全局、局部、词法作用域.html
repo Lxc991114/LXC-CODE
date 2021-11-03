@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局、局部、词法作用域</title>
+</head>
+
+<body>
+    <script>
+        /* 1.函数作用域 */
+        /* (1)全局作用域 */
+        function test() {
+            a = 5; //全局变量：在函数中定义变量不加var就是全局变量————别没事在函数内部定义全局变量
+            console.log(a);//5
+        }
+        test();
+        console.log(a);//5
+
+        var b = 7;//全局变量
+        function fn2() {
+            b = 8;//将全局变量b改成8
+            console.log(b);//8
+        }
+        fn2();
+        console.log(b);//8
+
+
+        /* 2.全局变量和局部变量 */
+        var c = 5;//全局变量 
+        function fn1() {
+            var c = 6;//局部变量
+            console.log(c);//6
+        }
+        fn1();
+        console.log(c);//5
+
+
+        var d = 4;
+        function fn3() {
+            var d = 5;
+            function fn4() {
+                var d = 6;
+                console.log(d);//6
+            }
+            fn4();
+            console.log(d);//5
+        }
+        fn3();
+        console.log(d);//4
+
+        /* 2.词法作用域：函数在定义(或声明)它们的作用域里运行
+           而不是在执行(或调用)它们的作用域里运行 */
+        var value = 1;
+        function foo() {
+            console.log(value);//1
+        }
+        function bar() {
+            var value = 2;
+            foo();
+        }
+        bar();
+
+
+
+    </script>
+
+</body>
+
+</html>

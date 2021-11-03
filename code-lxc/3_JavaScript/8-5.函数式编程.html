@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数式编程</title>
+</head>
+
+<body>
+    <script>
+        /* 1.函数可以作为一个值赋给一个变量 */
+        var fn1 = function () {
+            console.log('haha');
+        };
+
+        var fn2 = new Function("console.log('hehe')");
+        fn2();
+        console.log(typeof fn2);//function
+
+        /* 2.函数可以做为另一个函数的返回值 */
+        function test1(d) {
+            return function (e) {
+                return d + e;
+            }
+        };
+        var aa = test1(5);
+        var bb = aa(6);
+        console.log(bb);//11
+
+        /* 3.函数可以做为一个值传给另一个函数 */
+        function test(a) {
+            a(function (c) {
+                c();
+            });
+        }
+
+        test(function (b) {
+            b(function () {
+                console.log('hehe');
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

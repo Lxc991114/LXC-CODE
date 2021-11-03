@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象的介绍</title>
+</head>
+<body>
+    <script>
+     /* 
+            人到图书馆借书
+
+            人
+                属性：姓名、身份证号
+            书
+                属性：书名、ISBN
+            图书馆
+                属性：馆名、地址
+            管理员
+                方法：登记
+    */
+       var person = {
+           name: 'lisi',
+           idCard: '1234567890'
+       };
+
+       var book = {
+           name: '大学英语四级',
+           ISBN: '987654'
+       };
+
+       var library = {
+           name: '学府书店',
+           address: '学府路'
+       };
+
+       var manager = {
+           regist: function(person, book, library){//形参(形参名最好起的有意义)
+               console.log('借书人：' + person.name + ', 书名：' + book.name + ', 图书馆：' + library.name);//用对象.属性取出属性值
+           }
+       }
+
+       manager.regist(person, book, library);//实参，即上面的那三个对象
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this的指向问题</title>
+</head>
+
+<body>
+
+    <script>
+        /* this指向当前对象,辨别this的指向，要看离this最近的function是属于哪个对象的 */
+        /* 1.对象中的this */
+        var obj1 = {
+            name: 'lisi',
+            age: 13,
+            sayHellow: function () {
+                console.log(this);//打印出该对象
+            }
+        }
+        obj1.sayHellow()
+
+        /* 2.普通函数中的this */
+        function test1() {
+            console.log(this);//打印出全局的window对象
+        }
+        test1();
+
+        var aa = 555;//定义一个全局变量，可知全局变量也是存放在window对象中，相当于window的属性
+        console.log(window.aa);
+
+        /* 3.全局下方法中的this */
+        setTimeout(function () {
+            console.log(this);//打印出全局的window对象
+        }, 1000)
+    </script>
+    
+</body>
+
+</html>

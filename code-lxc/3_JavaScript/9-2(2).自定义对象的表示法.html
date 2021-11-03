@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义对象的表示法</title>
+</head>
+
+<body>
+    <script>
+        /* 点表示法和中括号表示法 */
+        /* (1)点表示法：不允许使用变量 */
+        var obj1 = {
+            name:'lisi',
+            age:13
+        }
+        var a = 'name';//变量
+
+        console.log(obj1.name);
+        console.log(obj1.aa);//undefined
+        
+        /* (2)中括号表示法：允许使用变量 */
+        var obj2 = {
+            address:'中国',
+            road:18
+        }
+        var b = 'address';//变量
+
+        console.log(obj2.address);
+        console.log(obj2[b]);//中国
+
+
+    </script>
+</body>
+
+</html>

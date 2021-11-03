@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择结构条件语句</title>
+</head>
+
+<body>
+    <script>
+        /* 1.if-else else-if */
+        var a = 5;
+        if (a == 5) {
+            console.log('a');
+        } else if (a == 6) {
+            console.log('b');
+        } else {
+            console.log('c');
+        }
+        /* 2.switch */
+        var b = 7;
+        switch (b) {
+            case 7: {
+                console.log('这是7');
+                break;//如果此处不加break，则会不需判断继续执行下一条语句
+            }
+            case 8: {
+                console.log('这是8');
+                break;
+            }
+            case 9: {
+                console.log('这是9');
+            }
+        }
+        /* switch语句中你case不加break，则会不需判断继续执行下一条语句的特征的例子 */
+        var c = prompt('请输入A(a)进行下一步');//会将提示框内输入的内容以字符串形式赋值给c
+        switch (c) {
+            case 'A':
+            case 'a': {
+                console.log('可以进行下一步');
+            }
+
+        }
+        /* switch中case的判断区分数据类型 */
+        var d = prompt('请输入文字');
+        console.log(typeof d);//string
+        switch (d) {
+            case 1: {
+                console.log('这是1');
+                break
+            }
+            case 2: {
+                console.log('这是2');
+                break
+            }//判断的是是否为数字，而输入的是字符，因此不会打印
+
+        }
+
+        /* 4.三元运算符：: 比较条件 ? 条件为真的结果 : 条件为假的结果  */
+        var e = 'abcd';
+        var f = e == 'abc' ? 5 : 6;
+        console.log(f);
+
+    </script>
+
+</body>
+
+</html>

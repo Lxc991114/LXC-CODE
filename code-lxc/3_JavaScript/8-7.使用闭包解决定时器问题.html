@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用闭包解决定时器问题</title>
+</head>
+
+<body>
+    <script>
+        /* 未用闭包 */
+        for (var c = 0; c < 3; c++) {//for循环特别快，页面一加载c就到3了
+            setTimeout(function () {//1000ms之后才加载出来，而此时的c已经到3
+                console.log(c);//3
+            }, 1000)
+        }
+        /* 使用闭包；变量永远不会被释放，除非将该变量的值设置为null */
+        for (var d = 0; d < 3; d++) {
+            (function (index) {//index用来存放for循环加载出来的0、1、2
+                setTimeout(function () {
+                    console.log(index);
+                    // index = null;用完index后手动释放
+                }, 1000);
+            })(d);
+        }
+    </script>
+
+</body>
+
+</html>

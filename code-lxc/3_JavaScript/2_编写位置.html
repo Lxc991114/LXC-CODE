@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS的编写位置</title>
+</head>
+<body>
+    <!-- 内联js -->
+    <button onclick="console.log('这是内联js的按钮')">这是内联js的按钮</button>
+    <button id="btn1">这是内部js的按钮</button>
+    <button id="btn2">这是外部js的按钮</button>
+    
+
+    <!-- 内部js：内部js放在哪里都行，写在html标签外都行，但是建议将script标签写在body标签内最后 -->
+    <script>
+        document.getElementById('btn1').onclick = function(){
+            console.log('这是内部js的按钮');
+        }
+    </script>
+    <!-- 外部js -->
+    <script src="./2-2.外部js.js"></script>
+</body>
+</html>
+

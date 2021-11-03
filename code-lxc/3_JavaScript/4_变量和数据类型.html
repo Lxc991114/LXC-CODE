@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变量和数据类型</title>
+</head>
+
+<body>
+    <script>
+        /* 数据类型*/
+        // 1. 基础类型：number、string、boolean、undefined、null
+        var a = 5; //number 
+        var b = 'abc'; //string(/也可以是"abc"); 
+        var c = true; //boolean
+        var d;//undefined: 未定义(手动设置undefined、参数定义了没传值也是undefined)
+        console.log(f);//not defined：没有定义，会报错
+        var e = null; //空，在js中null被指定为对空对象的引用，但是属于基本数据类型 
+
+        console.log(typeof e); //typeof是判断数据类型，e打印出来的是object，记住就好，是设计者初始的错误
+        // 2. 引用类型：object
+        var f = [2, 3, 4]
+        console.log(f instanceof Array);//instanceof是用来判断某个变量是否是某个对象的实例
+    </script>
+
+</body>
+
+</html>

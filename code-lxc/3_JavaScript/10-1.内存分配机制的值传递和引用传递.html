@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>值传递和引用传递</title>
+
+</head>
+
+<body>
+    <script>
+        /* 根据栈内存、堆内存理解 */
+        /* （1）值传递 */
+        var a = 5;
+        function test(aa) {
+            aa = 6;
+            console.log(aa);//6
+        }
+        test(a);
+        console.log(a);//5
+
+        /* （2）引用传递：其实底层仍是值传递 */
+        //
+        var o1 = {
+            name: 'lisi',
+        }
+
+        var o2 = o1;//看似是将o1的引用给了o2，其实是将栈内存中变量所掌握的堆内存中的地址给了o2，因此同步更改
+
+        o2.name = 'wangwu';
+        console.log(o1.name); //wangwu
+        
+        //
+        var o3 = {
+            name: 'lisi'
+        };
+        function test1(obj) {
+            obj.name = 'wangwu';
+            console.log(obj.name); //wangwu
+        }
+        test1(o3);
+        console.log(o3.name); //wangwu
+
+
+    </script>
+
+</body>
+
+</html>
