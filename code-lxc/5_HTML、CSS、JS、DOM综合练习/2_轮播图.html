@@ -106,25 +106,8 @@
 
         var curIndex = 0;//定义一个全局的索引变量
 
-        for (var i = 0; i < aLi.length; i++) {
-            aLi[i].index = i;
-            aLi[i].onclick = function () {
-                for (var j = 0; j < aLi.length; j++) {
-                    //清除样式
-                    aLi[j].className = '';
-                    aImg[j].className = '';
-                    //加上样式
-                    this.className = 'active';
-                    aImg[this.index].className = 'active';
-                    //告诉别人当前显示的是哪一页
-                    curIndex = this.index;
-                }
-            }
-        }
-        //2.翻页
-        //向下翻页
-        oNext.onclick = function () {
-            curIndex += 1;
+        //切换状态的方法
+        function change() {
             // 清空样式
             for (var j = 0; j < aLi.length; j++) {
                 aLi[j].className = '';
@@ -133,19 +116,45 @@
             // 给选中的加样式
             aLi[curIndex].className = 'active';
             aImg[curIndex].className = 'active';
+        }
+
+
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].index = i;
+            aLi[i].onclick = function () {
+                //告诉别人当前显示的是哪一页
+                curIndex = this.index;
+                change()
+            }
+        }
+
+        //2.按钮翻页
+        //向下翻页
+        oNext.onclick = function () {
+            curIndex += 1;
+            if (curIndex > 4) {
+                curIndex = 0;
+            }
+            change();
         }
         //向上翻页
         oPrev.onclick = function () {
             curIndex -= 1;
-            // 清空样式
-            for (var j = 0; j < aLi.length; j++) {
-                aLi[j].className = '';
-                aImg[j].className = '';
+            curIndex -= 1;
+            if (curIndex < 0) {
+                curIndex = 4;
             }
-            // 给选中的加样式
-            aLi[curIndex].className = 'active';
-            aImg[curIndex].className = 'active';
+            change();
         }
+        //2.自动翻页
+        setInterval(function(){
+            curIndex += 1;
+            if (curIndex > 4) {
+                curIndex = 0;
+            }
+            change();
+        }, 1000);
+
 
     </script>
 

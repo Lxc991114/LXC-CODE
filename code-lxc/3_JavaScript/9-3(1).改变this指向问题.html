@@ -50,7 +50,7 @@
         btn2.onclick = function () {
             setTimeout(function () {
                console.log(this, 'btn2');
-            }.bind(btn2), 3000);//此处bind(btn2)后面不需要手动调用，因为定时器将在3s后调用
+            }.bind(btn2), 3000);//此处bind(btn2)后面不需要手动调用，因为延迟函数将在3s后调用
         }
         //为什么不可以使用call、apply：
         var btn3 = document.getElementById('btn3');
@@ -58,7 +58,7 @@
             var fn = function(){
                 console.log(this ,'btn3');
             };
-            setTimeout(fn.call(btn), 3000);//使用call、apply会直接调用，不会等计时器来调用
+            setTimeout(fn.call(btn), 3000);//使用call、apply会直接调用，不会等延迟函数来调用
         }
 
         
