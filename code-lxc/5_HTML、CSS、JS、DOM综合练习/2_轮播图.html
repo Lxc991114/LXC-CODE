@@ -98,7 +98,7 @@
 
     </div>
     <script>
-        //1.点击数字切换页面
+        var oContainer = document.getElementById('container');
         var aLi = document.querySelectorAll('.li-box>li');
         var aImg = document.querySelectorAll('.img-box>img');
         var oPrev = document.getElementById('prev');
@@ -118,7 +118,7 @@
             aImg[curIndex].className = 'active';
         }
 
-
+        //1.点击数字切换页面
         for (var i = 0; i < aLi.length; i++) {
             aLi[i].index = i;
             aLi[i].onclick = function () {
@@ -146,10 +146,24 @@
             }
             change();
         }
-        //2.自动翻页
-        setInterval(function () {
+        
+        //3.自动翻页
+        var timer = setInterval(function (params) {
             oNext.onclick()
         }, 1000);
+
+
+        //鼠标移出时自动翻页
+        oContainer.onmouseout = function () {
+            setInterval(function (params) {
+                oNext.onclick()
+            }, 1000);
+        }
+
+        //鼠标划入时不自动翻页
+        oContainer.onmouseover = function () {
+            clearInterval(timer)
+        }
 
 
     </script>
