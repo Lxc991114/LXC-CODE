@@ -146,21 +146,20 @@
             }
             change();
         }
-        
-        //3.自动翻页
+
+        //3.自动翻页:
         var timer = setInterval(function (params) {
             oNext.onclick()
         }, 1000);
 
+        //用户手动划入时不该继续翻页，划出时继续翻页
 
-        //鼠标移出时自动翻页
         oContainer.onmouseout = function () {
             setInterval(function (params) {
                 oNext.onclick()
             }, 1000);
         }
 
-        //鼠标划入时不自动翻页
         oContainer.onmouseover = function () {
             clearInterval(timer)
         }
