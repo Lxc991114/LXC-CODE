@@ -148,25 +148,26 @@
         }
 
         //3.自动翻页:
-        var timer = setInterval(function (params) {
-            oNext.onclick()
-        }, 1000);
 
-        //用户手动划入时不该继续翻页，划出时继续翻页
+        //定义一个全局变量timer
+        var timer;
 
-        oContainer.onmouseout = function () {
-            setInterval(function (params) {
+        // 自动翻页函数
+        function go() {
+            timer = setInterval(function () {
                 oNext.onclick()
             }, 1000);
         }
+        go();
 
-        oContainer.onmouseover = function () {
-            clearInterval(timer)
+        oContainer.onmouseout = function () {
+            go();
         }
-
-
+        oContainer.onmouseover = function () {    
+            //可确保每次每次删除的都是刚才调用的那个定时器，防止鼠标划入时设置多个定时器
+            clearInterval(timer);
+        }
     </script>
-
 
 </body>
 
