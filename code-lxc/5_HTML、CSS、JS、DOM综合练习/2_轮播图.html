@@ -147,12 +147,8 @@
             change();
         }
         //2.自动翻页
-        setInterval(function(){
-            curIndex += 1;
-            if (curIndex > 4) {
-                curIndex = 0;
-            }
-            change();
+        setInterval(function () {
+            oNext.onclick()
         }, 1000);
 
 
