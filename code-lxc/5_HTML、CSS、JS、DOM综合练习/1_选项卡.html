@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #container {
+            width: 300px;
+            height: 300px;
+            background-color: burlywood;
+            margin: 0 auto;
+        }
+
+        #title {
+            height: 50px;
+            border-bottom: 1px solid black;
+        }
+
+        #title>li {
+            float: left;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        #title li.active {
+            background-color: chartreuse;
+            color: cornsilk;
+        }
+
+        #content {
+            height: 250px;
+        }
+
+        #content>div {
+            height: 250px;
+            display: none;
+        }
+
+        #content div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <ul id="title">
+            <li class="active">选项1</li>
+            <li>选项2</li>
+            <li>选项3</li>
+        </ul>
+        <div id="content">
+            <div class="active">111</div>
+            <div>222</div>
+            <div>333</div>
+        </div>
+    </div>
+    <script>
+        var oUl = document.getElementById('title');
+        var aLi = oUl.getElementsByTagName('li');
+        var aDiv = document.querySelectorAll('#content div');
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].index = i;//给每个选项加一个索引
+            aLi[i].onclick = function () {
+                //取消所有的active
+                for (var j = 0; j < aLi.length; j++) {
+                   aLi[j].className = '';
+                   aDiv[j].className = '';
+                }
+
+                //给选中的加上active
+                this.className = 'active';//此处用this，让代码知道，知道谁谁变，此处不能是aLi[i].className.因为页面加载时a就到3了
+                aDiv[this.index].className = 'active';//因为提前将索引作为一个属性存在了数组对象中，所以此处可以这样拿到索引
+            }
+        }
+    </script>
+
+</body>
+
+</html>

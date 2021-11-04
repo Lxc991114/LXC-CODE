@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #container {
+            width: 750px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .img-box img {
+            display: none;
+        }
+
+        .img-box img.active {
+            display: block;
+        }
+
+        .li-box {
+            width: 100px;
+            height: 20px;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            right: 50px;
+            bottom: 30px;
+        }
+
+        .li-box li {
+            width: 18px;
+            background-color: rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .li-box li.active {
+            background-color: rgb(255, 115, 0);
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: rgba(0, 0, 0, 0.3);
+            font-size: 40px;
+            color: papayawhip;
+
+        }
+
+        #prev {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -25px;
+        }
+
+        #over {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="img-box">
+            <img src="../img/轮播图/1.jpg" class="active">
+            <img src="../img/轮播图/2.jpg">
+            <img src="../img/轮播图/3.jpg">
+            <img src="../img/轮播图/4.jpg">
+            <img src="../img/轮播图/5.jpg">
+        </div>
+        <ul class="li-box">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <div class="btn" id="prev">&lt;</div>
+        <div class="btn" id="over">&gt;</div>
+
+    </div>
+    <script>
+        //1.点击数字切换页面
+        var aLi = document.querySelectorAll('.li-box>li');
+        var aImg = document.querySelectorAll('.img-box>img');
+        var oPrev = document.getElementById('prev');
+        var oNext = document.getElementById('over');
+
+        var curIndex = 0;//定义一个全局的索引变量
+
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].index = i;
+            aLi[i].onclick = function () {
+                for (var j = 0; j < aLi.length; j++) {
+                    //清除样式
+                    aLi[j].className = '';
+                    aImg[j].className = '';
+                    //加上样式
+                    this.className = 'active';
+                    aImg[this.index].className = 'active';
+                    //告诉别人当前显示的是哪一页
+                    curIndex = this.index;
+                }
+            }
+        }
+        //2.翻页
+        //向下翻页
+        oNext.onclick = function () {
+            curIndex += 1;
+            // 清空样式
+            for (var j = 0; j < aLi.length; j++) {
+                aLi[j].className = '';
+                aImg[j].className = '';
+            }
+            // 给选中的加样式
+            aLi[curIndex].className = 'active';
+            aImg[curIndex].className = 'active';
+        }
+        //向上翻页
+        oPrev.onclick = function () {
+            curIndex -= 1;
+            // 清空样式
+            for (var j = 0; j < aLi.length; j++) {
+                aLi[j].className = '';
+                aImg[j].className = '';
+            }
+            // 给选中的加样式
+            aLi[curIndex].className = 'active';
+            aImg[curIndex].className = 'active';
+        }
+
+    </script>
+
+
+</body>
+
+</html>
