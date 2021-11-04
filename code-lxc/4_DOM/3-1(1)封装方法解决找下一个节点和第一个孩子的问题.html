@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>找下一个兄弟和第一个孩子</title>
+</head>
+
+<body>
+    <div id="div1">
+        <a href="">这是个链接</a>
+        <h1>这是个标题</h1>
+        <p>这是个p</p>
+        <div id="div2">
+            <p>这是div2下的p</p>
+        </div>
+        <h1 id="title">这是标题</h1>
+        <p>元素</p>
+    </div>
+
+    <script>
+        var oDiv1 = document.getElementById('div1');
+        var oH1 = document.querySelector('#title');
+
+        /**
+        * 返回elem的下一个元素兄弟
+        */
+        function next(elem) {
+            // 循环调用elem.nextSibling找下一个兄弟元素
+            do {
+                elem = elem.nextSibling;
+            } while (elem && elem.nodeType != 1);
+            return elem;
+        }
+
+        function first(elem) {
+            elem = elem.firstChild;
+            return elem && elem.nodeType == 1 ? elem : next(text);
+        }
+
+        var oP = next(oH1);
+        console.log(oP);
+        if (oP) {
+            oP.style.background = 'red';
+        }
+
+
+        /**
+        * 返回第一个孩子
+        */
+
+        function first(elem){
+            elem = elem.firstChild;
+            return elem && elem.nodeType == 1 ? elem : next(text);
+        }
+
+
+    </script>
+</body>
+
+</html>

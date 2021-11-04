@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击删除按钮，删除本行的数据</title>
+    <style>
+        #tbl1,
+        #tbl1 td,
+        #tbl1,
+        th {
+            border: 1px solid #000000;
+        }
+
+        #tbl1 {
+            border-collapse: collapse;
+            width: 60%;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="tbl1">
+        <tr>
+            <th>id</th>
+            <th>姓名</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td>111</td>
+            <td>lisi</td>
+            <td><button class="btn-del" userId="111">删除</button></td>
+        </tr>
+        <tr>
+            <td>222</td>
+            <td>wangwu</td>
+            <td><button class="btn-del" userId="222">删除</button></td>
+        </tr>
+        <tr>
+            <td>333</td>
+            <td>zhaoliu</td>
+            <td>
+                <button class="btn-del" userId="333">删除</button>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        /* 点击删除，删除本行的数据 */
+        var aBtnDel = document.querySelectorAll('#tbl1 .btn-del');
+        for (var i = 0; i < aBtnDel.length; i++) {
+            aBtnDel[i].onclick = function () {//给数组添加单击事件没意义，要给数组中的每个元素添加单击事件
+                //应该找到对应的id并且删除，因此应该找到和自己在同一tr中第一个td中的文本
+                // （1）console.log(aBtnDel[i].parentNode.parentNode.firstElementChild.innerHTML);
+                /* 方法（1）会报错，aBtnDel[i]是undefined，因为for循环时页面一加载就循环到3了
+                而点击事件里的东西被点击时页面都已经加载完毕了，点击按钮的时候i的值就已经是3了，所以打印的一直都是aBtnDel[3]，而数组只到aBtnDel[2]
+                */
+                // （2）console.log(this.parentNode.parentNode.firstElementChild.innerHTML);
+                /* 方法（2）永远指向当前对象，操作谁this就是谁，所以该方法可以，但是有兼容性问题，不推荐 */
+                //（3）推荐使用自定义属性
+                console.log(this.getAttribute('userid'));
+                //后一步再进行各种数据操作
+            };
+        }
+    </script>
+</body>
+
+</html>

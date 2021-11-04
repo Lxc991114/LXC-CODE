@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM的查找</title>
+</head>
+
+<body>
+    <button id="btn">这是个按钮</button>
+    <ul>
+        <li>根据标签获取</li>
+        <li>根据标签获取</li>
+        <li>根据标签获取</li>
+    </ul>
+    <div>
+        <p class="pa">这是段落</p>
+        <p class="pa">这是段落</p>
+    </div>
+    <input type="text" name="into">
+    <button id="btn1">这也是个按钮</button>
+    <ul id="ul1">
+        <li class="aa bb">es5</li><!-- aa和bb选择器 -->
+        <li class="aa">es5</li>
+    </ul>
+    <script>
+        /* 1.getElementById() */
+        var oBtn = document.getElementById('btn');
+        oBtn.onclick = function () {
+            console.log('hahaha');
+        }
+
+        /* 2.getElementsByTagName() */
+        var aLi = document.getElementsByTagName('li');//将li标签以类数组形式返回
+        //aLi是一个类数组，而非真正的数组,可以看数组长度，但是没有普通数组中的方法
+        console.log(aLi[0]);
+
+        /* 3.getElementsByClassName()————在IE8-的兼容性问题 */
+        var aPa = document.getElementsByClassName('pa');
+        for (var i = 0; i < aPa.length; i++) {
+            aPa[i].style.background = 'red';
+        }
+
+        /* 4.getElementByName()————表单元素的name属性 */
+        var oInput = document.getElementsByName('into');
+
+        /* 
+        var oDiv1 = document.getElementById('div1');
+        oDiv1.getElementById('btn1');//语法错误,getElementById只能是下的
+        oDiv1.getElementsByTagName('h1')//可以
+        oDiv1.getElementsByClassName('aa');//可以
+        */
+
+        /* 5.querySelector()————es5 */
+        var oBtn1 = document.querySelector('#btn1');//只能找到一个，即使是多个，也是选中多个中的第一个
+        oBtn1.onclick = function () {
+            console.log('haha');
+        };
+
+        /* 6.querySelectorAll()————es5:更灵活 */
+        var oUl1 = document.querySelector('#ul1');
+        var aLi = oUl1.querySelectorAll('.aa');//可以找到多个
+        //上面两行可以用一句话概括： var aLi = document.querySelectorAll('#ul1 .aa');
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].style.background = 'green';
+        }
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

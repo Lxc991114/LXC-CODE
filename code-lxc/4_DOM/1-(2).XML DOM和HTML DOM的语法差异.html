@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML DOM和HTML DOM的语法差异</title>
+    <style>
+        #tbl1, #tbl1 td, #tbl1 th{
+            border: 1px solid #000000;
+        }
+        #tbl1{
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">添加一行</button>
+    
+    <table id="tbl1">
+        <thead><!-- 表格头 -->
+            <tr>
+                <th>id</th>
+                <th>用户名</th>
+                <th>密码</th>
+            </tr>
+        </thead>
+        <tbody id="tbody1">
+            <tr>
+                <td>text 1</td>
+                <td>text 2</td>
+                <td>text 3</td>
+            </tr>
+            <tr>
+                <td>text 1</td>
+                <td>text 2</td>
+                <td>text 3</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        /* 想要点击按钮，往tbody里插入一行 */
+
+        var oBtn = document.getElementById('btn');
+        // var oTbl1 = document.getElementById('tbl1');
+        var oTbody1 = document.getElementById('tbody1');
+        oBtn.onclick = function(){
+            // 1.XML DOM 操作
+            // （1）动态创建元素(只是创建在了内存空间，看不见)
+            // var oTr = document.createElement('tr');
+
+            // var oTd1 = document.createElement('td');
+            // var oTd2 = document.createElement('td');
+            // var oTd3 = document.createElement('td');
+
+            // （2）创建文本节点（文本也是一个节点）
+            // var textNode1 = document.createTextNode('haha');
+            // oTd1.appendChild(textNode1);
+            // var textNode2 = document.createTextNode('hehe');
+            // oTd2.appendChild(textNode2);
+            // var textNode3 = document.createTextNode('xixi');
+            // oTd3.appendChild(textNode3);
+
+            // oTr.appendChild(oTd1);
+            // oTr.appendChild(oTd2);
+            // oTr.appendChild(oTd3);
+
+            // oTbody1.appendChild(oTr);
+
+            // 1.HTML DOM 操作(简单、性能好)
+
+            var oTr = oTbody1.insertRow();//插入行;insertCell()插入列;往里面写内容用innerText
+            oTr.insertCell().innerText = "haha";
+            oTr.insertCell().innerText = "hehe";
+            oTr.insertCell().innerText = "xixi";
+
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM事件</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 100px;
+            background: #ff0000;
+        }
+
+        #div2 {
+            width: 200px;
+            height: 100px;
+            background: #10a33c;
+        }
+
+        #div3 {
+            width: 200px;
+            height: 100px;
+            background: #1638d1;
+        }
+
+        #div4 {
+            width: 200px;
+            height: 100px;
+            background: #e4d610;
+        }
+
+        #div5 {
+            width: 200px;
+            height: 100px;
+            background: #e100ff;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">单击按钮</button>
+    <button id="btn2">双击按钮</button>
+
+    <div id="div1">当指针滑入或滑出元素或其中的子元素上时，发生此事件</div>
+    <div id="div2">当用户将鼠标指针移出元素或其中的子元素时，发生此事件</div>
+    <div id="div3">当指针在元素上方移动时，发生此事件</div>
+    <div id="div4">当用户在元素上按下鼠标按钮时，发生此事件</div>
+    <div id="div5">当用户在元素上释放鼠标按钮时，发生此事件</div>
+
+    <script>
+        var oBtn1 = document.querySelector('#btn1');
+        var oBtn2 = document.querySelector('#btn2');
+        //1.点击(不一定是鼠标点击)
+        oBtn1.onclick = function (e) {
+            console.log('hehe');
+        };
+        oBtn2.ondblclick = function () {
+            console.log('haha');
+        };
+
+        //2.鼠标滑动
+        var oDiv1 = document.querySelector('#div1');
+        var oDiv2 = document.querySelector('#div2');
+        var oDiv3 = document.querySelector('#div3');
+        var oDiv4 = document.querySelector('#div4');
+        var oDiv5 = document.querySelector('#div5');
+
+        oDiv1.onmouseover = function () {
+            console.log('over', Math.random());
+        };
+        oDiv2.onmouseout = function () {
+            console.log('out', Math.random());
+        };
+        oDiv3.onmousemove = function () {
+            console.log('move', Math.random());
+        };
+        oDiv4.onmousedown = function () {
+            console.log('down', Math.random());
+        };
+        oDiv5.onmouseup = function () {
+            console.log('up', Math.random());
+        };
+
+        //3.键盘：按下的一瞬间不知道输入的哪个字符，只有松开了才知道输入了哪个字符
+        document.onkeydown = function () {//贪吃蛇转向
+            console.log('down', Math.random());
+        };
+        document.onkeyup = function () {//搜索引擎的搜索
+            console.log('up', Math.random());
+        };
+        /*  键盘按下并松开的全过程，用的不多
+       document.onkeypress = function () {
+            console.log('press', Math.random());
+        }; */
+      
+
+
+    </script>
+
+</body>
+
+</html>

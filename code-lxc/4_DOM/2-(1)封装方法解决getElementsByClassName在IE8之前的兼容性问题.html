@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装方法解决getElementsByClassName在IE8之前的兼容性问题</title>
+</head>
+
+<body>
+    <ul id="ul1">
+        <li>item 1</li>
+        <li class="aa bb">item 2</li>
+        <li class="aa">item 3</li>
+    </ul>
+
+    <script>
+        // 封装getByClass解决getElementsByClassName在IE8-的兼容性问题
+        /**
+         * @param className 要搜索的类名
+         * @param tagName 限定搜索的标签名
+         * @param context 限定搜索的上下文（范围）
+         */
+        function getByClass(className, tagName, context) {
+            var result = []; //用来存放找到的元素
+            context = context || document;
+            // context = context == undefined ? document : context;
+            // 判断当前浏览器是否支持getElementsByClassName，如果支持直接使用它
+            // 只判断当前浏览器是否支持getElementsByClassName，不需要关心是什么浏览器以及它是什么版本
+            if (context.getElementsByClassName) {
+                return context.getElementsByClassName(className);
+            } else {
+                // 自写代码处理上面不支持的情况
+                var arr = context.getElementsByTagName(tagName);
+                for (var i = 0; i < arr.length; i++) {
+                    // 过滤出所有元素的class属性的值等于传过来的className
+                    // arr[i].className => 不应该使用"aabb" == "aa"，而是应该查是否包含，可以用indexOf，只要不等于-1，就说明可以检索到，是包含的
+                    //也可以用march、search————但是涉及到正则表达式的问题
+                    //代码仍有问题，因为如果类名是aabb，我要找到类名是aa的就不应该找到aabb，但是现在的这个也会找到aabb
+                    if (arr[i].className.indexOf(className) != -1) { //TODO: 未来要使用正则来完善
+                        result.push(arr[i]);
+                    }
+                }
+            }
+            return result;
+        }
+
+        var oUl1 = document.getElementById('ul1');
+        var aLi = getByClass('aa', 'li', oUl1);
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].style.background = 'green';
+        }
+
+
+    </script>
+</body>
+
+</html>

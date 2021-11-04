@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM的遍历</title>
+</head>
+
+<body>
+    <div id="div1">
+        <a href="">这是个链接</a>
+        <h1>这是个标题</h1>
+        <p>这是个p</p>
+        <div id="div2">
+            <p>这是div2下的p</p>
+        </div>
+        <h1 id="title">这是标题</h1>
+        <p>元素</p>
+    </div>
+
+    <script>
+        var oDiv1 = document.getElementById('div1');
+        var oH1 = document.querySelector('#title');
+
+        /* 1.children:找到当前元素的所有子代元素 */
+        console.log(oDiv1.children);
+        //childNodes（XML DOM 语法）: 找到当前元素下面的所有的子代元素节点，包含文档节点，空格和换行也当作文本找到
+        console.log(oDiv1.childNodes);
+        //firstChild（有兼容性问题，利用firstChild如果找到的是文本节点，文本节点没有style属性，给其加背景会报错，而ie8中不会报错，ie和ie8之前的浏览器中永远找到的都是元素节点）
+        console.log(oDiv1.firstChild);//#text————找到的是空格
+
+        /* 2.nextSibling（有兼容性问题，利用firstChild如果找到的是文本节点，文本节点没有style属性，给其加背景会报错，而ie8中不会报错，ie和ie8之前的浏览器中永远找到的都是元素节点） */
+        console.log(oH1.nextSibling);
+
+        /* 3.nextElementSibling（有兼容性问题，ie8和ie8之前没有） */
+        console.log(oH1.nextElementSibling);
+
+        /* 4. parentNode: 找父元素 */
+        console.log(oH1.parentNode);
+
+        /* 5.offsetParent: 最近的已定位的父元素 */
+        console.log(oH1.offsetParent);
+
+        /* 6. innerHTML:插入标签 和 innerText(XML DOM中是textContent)：插入文本*/
+        oH1.innerHTML = "<span>hehe</span>";
+        oH1.innerText = "<span>hehe</span>";
+
+
+
+
+    </script>
+
+</body>
+
+</html>

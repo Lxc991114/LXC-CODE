@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM的操纵</title>
+</head>
+
+<body>
+    <button id="btn1">添加</button>
+    <button id="btn2">删除</button>
+    <button id="btn3">替换</button>
+    <button id="btn4">插入</button>
+    <button id="btn5">克隆</button>
+    <button id="btn6">属性按钮</button>
+    <button id="btn7" cc='dd'>自定义属性按钮cc</button>
+    <button id="btn8" dd='dd'>自定义属性按钮dd</button>
+    <button id="btn9" ee='ee'>自定义属性按钮dd</button>
+
+
+
+    <ul id="ul1">
+        <li class="li1">item1</li>
+        <li class="li1">item2</li>
+    </ul>
+
+    <ul id="ul2">
+        <li class="li2">item1</li>
+        <li class="li2">item2</li>
+    </ul>
+
+    <ul id="ul3">
+        <li class="li3">item1</li>
+        <li class="li3">item2</li>
+    </ul>
+
+    <ul id="ul4">
+        <li class="li4">item1</li>
+        <li class="li4">item2</li>
+    </ul>
+
+    <ul id="ul5">
+        <li class="li5">item1</li>
+        <li class="li5">
+            item2
+            <a href="">这是个链接</a>
+        </li>
+    </ul>
+
+
+
+    <script>
+        /* 1.添加一个元素:appendChild() */
+        var oUl1 = document.querySelector('#ul1');
+        var oBtn1 = document.getElementById('btn1');
+        oBtn1.onclick = function () {
+            //在内存中创建一个li
+            var oLi1 = document.createElement('li');
+            oLi1.innerText = 'haha';//加入点文本
+            //追加到oUl1中
+            oUl1.appendChild(oLi1);
+        }
+
+        /* 2.删除一个元素:removeChild() */
+        var oUl2 = document.querySelector('#ul2');
+        var oBtn2 = document.getElementById('btn2');
+        oBtn2.onclick = function () {
+            //删除父元素的最后一个元素孩子
+            oUl2.removeChild(oUl2.lastElementChild);
+        }
+
+        /* 3.替换一个元素:replaceChild()(第一个参数是换上什么，第二个参数是要换哪个) */
+        var oUl3 = document.querySelector('#ul3');
+        var oBtn3 = document.getElementById('btn3');
+        oBtn3.onclick = function () {
+            //替换
+            var oNewLi = document.createElement('li');
+            oNewLi.innerHTML = Math.random();
+            oUl3.replaceChild(oNewLi, oUl3.lastElementChild);
+        }
+
+        /* 4.插入一个元素：insertBefore()(第一个参数是插什么，第二个参数是插在哪) */
+        var oUl4 = document.querySelector('#ul4');
+        var oBtn4 = document.getElementById('btn4');
+        oBtn4.onclick = function () {
+            //替换
+            var oNewLi1 = document.createElement('li');
+            oNewLi1.innerHTML = Math.random();
+            oUl4.insertBefore(oNewLi1, oUl4.children[1]);//插在oUl4的第一个节点后面
+        }
+
+        /* 5.克隆元素：cloneNode(true)(括号里面传true会把该节点的孩子全部克隆，否则不克隆,反之不克隆；克隆谁就是谁点cloneNode) */
+        var oUl5 = document.querySelector('#ul5');
+        var oBtn5 = document.getElementById('btn5');
+        oBtn5.onclick = function () {
+            var oCloneNode = oUl5.lastElementChild.cloneNode(true);
+            oUl5.appendChild(oCloneNode);
+        };
+
+        /* 6.操纵属性节点：区分内存属性和HTML结构中的属性 
+        （1）对象.属性的方法对于HTML结构中的属性的增删改查来说不标准
+        （2）setAttribute()、getAttribute()是专门处理HTML结构中的属性的方法
+        */
+
+        //当属性是自带的属性时，HTML写法和XML写法视觉上没什么区别
+        var oBtn6 = document.getElementById('btn6');
+        oBtn6.onclick = function () {
+            //（1）不标准的写法
+            //获取属性和设置属性的写法(HTML写法)： oBtn6.id 、oBtn6.id = 'aa';
+            //（2）标准的写法
+            //设置属性的写法(XML写法)：第一个参数是改什么，第二个参数是改成什么、
+            oBtn6.setAttribute('id', 'bb');
+            //获取属性的写法(XML写法)：
+            console.log(oBtn1.getAttribute('id'));
+        }
+
+        //当有自定义属性(很重要)的时候，HTML写法和XML写法就有区别了，涉及到兼容性问题
+        //（1）不正确的使用
+        var oBtn7 = document.getElementById('btn7');
+        oBtn7.onclick = function () {
+            console.log(this.cc);//undefined
+        }
+        var oBtn8 = document.getElementById('btn8');
+        oBtn8.onclick = function () {
+            this.dd = 'ee';
+            console.log(this.dd);//打印出ee，但是元素审查的时候发现并没改变dd的值
+           
+        }
+        //（2）正确的使用
+        var oBtn9 = document.getElementById('btn9');
+        oBtn9.onclick = function () {
+            this.setAttribute('ee', 'ff');//打印出ff，元素审查的时候ye改变ee的值
+            console.log(this.getAttribute('ee'));
+        }
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

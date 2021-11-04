@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解决同一事件多次绑定操作被覆盖问题</title>
+    <style>
+        body {
+            height: 2000px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">点我</button>
+    <button id="btn2">点我</button>
+    <button id="btn3">点我</button>
+    <button id="btn4">点我</button>
+    <script>
+        /* 一.事件多次绑定问题 */
+        //1.标准浏览器可使用：addEventListener()[事件监听]——————打印顺序为haha hehe
+        var oBtn1 = document.querySelector('#btn1');
+        oBtn1.addEventListener('click', function () {
+            console.log("haha");
+        }, false);
+        oBtn1.addEventListener('click', function () {
+            console.log("hehe");
+            console.log(this);//————————可以正常打印出按钮
+        }, false);
+        //2.ie浏览器中可使用：attachEvent()[事件捕捉]——————打印顺序为hehe haha
+        /*  var oBtn1 = document.querySelector('#btn1');
+         oBtn1.attachEvent('onclick', function () {
+            console.log('haha');
+         });
+         oBtn1.attachEvent('onclick', function () {
+            console.log('hehe');
+            console.log(this);//————————会打印出window,这个方法会把this绑丢
+         });*/
+
+        /* 二.为什么不直接打印两次，而要多次绑定同一事件被覆盖问题？
+        很多时候不同小组或者不同人都在维护一个业务如滚动条滚动
+        */
+        /* 1.后面会覆盖前面 */
+        // window.onscroll = function(){
+        //     console.log('haha');
+        // };
+
+        // window.onscroll = function(){
+        //     console.log(Math.random());
+        // };
+
+        /* 2.使用事件监听不会使代码进行覆盖 */
+        window.addEventListener('scroll', function () {
+            console.log('haha');
+        }, false);
+        window.addEventListener('scroll', function () {
+            console.log(Math.random());
+        }, false);
+
+        /* 三.取消事件绑定 */
+        //1.普通事件绑定的取消
+        var oBtn2 = document.querySelector('#btn2');
+
+        oBtn2.onclick = function(){
+            console.log('hehe');
+        };
+        oBtn2.onclick = null;
+
+        //2.对事件监听的取消
+       //（1）取消不成功情况：绑定和取消的函数长得一样，但是不是一个函数，只要写了一个function就执行了一个new Function()，内存空间是两个空间
+       var oBtn3 = document.querySelector('#btn3');
+
+        oBtn3.addEventListener('click', function(){
+            console.log("haha");
+        }, false);
+
+        oBtn3.removeEventListener('click', function(){
+            console.log("haha");
+        }, false);
+
+       //（2）取消成功
+       var oBtn4 = document.querySelector('#btn4');
+
+       var fn = function(){
+            console.log("haha");
+        };
+
+        oBtn4.addEventListener('click', fn, false);
+
+        oBtn4.removeEventListener('click', fn, false);
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

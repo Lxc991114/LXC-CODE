@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装阻止默认行为的解决兼容性的方法</title>
+</head>
+
+<body>
+    <a href="http://www.baidu.com" id="goToBaidu">去百度</a>
+    <script>
+        var oBtn = document.getElementById('goToBaidu');
+        oBtn.onclick = function (event) {
+            event = event || window.event;//ie浏览器不认识event这个形参，必须使用window.event.returnValue，因此此处有个操作
+            event.preventDefault();//标准浏览器中阻止默认行为的方法
+            event.returnValue = false;//ie浏览器中阻止默认行为的属性
+        };
+
+    </script>
+
+</body>
+
+</html>

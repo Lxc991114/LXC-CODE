@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        #div1{
+            background-color: aqua;
+        }
+        .aa{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <button id = 'btn'>这是个按钮</button>
+    <div id="div">点击这个div他会变颜色</div>
+    <div id="div1">这是另一个div</div>
+    
+    <script>
+        var btn = document.getElementById('btn');
+        /* 操纵了html中的结构 */
+        btn.onclick = function(){
+            console.log('hahaha');
+        }
+
+        var div = document.getElementById('div');
+        div.onclick = function(){
+            /* 操纵了css中的样式 */
+            div.style.width = '200px';
+            div.style.height = '300px';
+            div.style.backgroundColor = 'red';//CSS中带中间杠的属性，把杠去掉，把杠后面第一个字母大写
+        }
+
+        var div1 = document.getElementById('div1');
+        div1.onclick = function(){
+            div1.className = 'aa';//不是通过js动态插入的优先级就一定比别人高，还是要看选择器自身优先级，但是动态插入的相当于内联样式
+            div1.classList.add('cc');//将cc这个类动态插入到其中(remove则可以删除)
+        }
+
+    </script>
+</body>
+</html>

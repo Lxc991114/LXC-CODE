@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件委托</title>
+</head>
+
+<body>
+    <ul id="ul1">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <button id="btn-add">添加</button>
+    <ul id="ul2">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <button id="btn-add1">添加</button>
+    <ul id="ul3">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <button id="btn-add2">添加</button>
+    <ul id="ul4">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <button id="btn-add3">添加</button>
+    <ul id="ul5">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+
+
+
+    <script>
+        //正常打印标签内内容
+        var aLi1 = document.querySelectorAll('#ul1 li');
+        for (var a = 0; a < aLi1.length; a++) {
+            aLi1[a].onclick = function () {
+                console.log(this.innerHTML);
+            };
+        }
+
+        //无法打印动态插入的新标签内内容：后插入的标签没绑定事件
+        var aLi2 = document.querySelectorAll('#ul2 li');
+        for (var b = 0; b < aLi2.length; b++) {
+            aLi2[b].onclick = function () {
+                console.log(this.innerHTML);
+            };
+        }
+
+        var oUl1 = document.querySelector('#ul2');
+        var oBtnAdd = document.querySelector('#btn-add');
+        oBtnAdd.onclick = function () {
+            var oLi1 = document.createElement('li');
+            oLi1.innerHTML = Math.random();
+            oUl1.appendChild(oLi1);
+        };
+
+        //解决后生成的元素的事件绑定问题：
+        //1.创建的时候就把事件绑定好
+        //(1)性能不够好，每创建一个函数就多一个函数对象，就多创建一个堆空间
+        var aLi3 = document.querySelectorAll('#ul3 li');
+        for (var c = 0; c < aLi3.length; c++) {
+            aLi3[c].onclick = function () {
+                console.log(this.innerHTML);
+            };
+        }
+
+        var oUl2 = document.querySelector('#ul3');
+        var oBtnAdd1 = document.querySelector('#btn-add1');
+        oBtnAdd1.onclick = function () {
+            var oLi2 = document.createElement('li');
+            oLi2.innerHTML = Math.random();
+            oLi2.onclick = function () {
+                console.log(this.innerHTML);
+            }
+            oUl2.appendChild(oLi2);
+        };
+
+        //(2)最开始已经创建了一个堆空间，后续只会将指针指向该块的堆空间，而不会再创造一个，但是代码很乱
+        var fn = function () {
+            console.log(this.innerHTML);
+        }
+
+        var aLi4 = document.querySelectorAll('#ul4 li');
+        for (var d = 0; d < aLi4.length; d++) {
+            aLi4[d].onclick = fn;
+        }
+
+        var oUl3 = document.querySelector('#ul4');
+        var oBtnAdd2 = document.querySelector('#btn-add2');
+        oBtnAdd2.onclick = function () {
+            var oLi3 = document.createElement('li');
+            oLi3.innerHTML = Math.random();
+            oLi3.onclick = fn;
+            oUl3.appendChild(oLi3);
+        };
+
+        //2.🍎事件委托：利用事件冒泡解决后生成元素的事件绑定问题
+        //后生成的元素绑定事件、过多的元素需要绑定事件都可以用到事件委托
+        var oUl5 = document.querySelector('#ul5');
+        var oBtnAdd3 = document.querySelector('#btn-add3');
+        oBtnAdd3.onclick = function () {
+            var oLi4 = document.createElement('li');
+            oLi4.innerHTML = Math.random();
+            oUl5.appendChild(oLi4);
+        };
+        //将点击事件绑定在父元素身上，利用事件冒泡
+        oUl5.onclick = function(event){
+            event = event || window.event;//解决浏览器事件的兼容性问题
+            target = event.target || event.srcElement;//解决事件源的兼容性问题
+            if(target.tagName == 'LI'){//确定点的元素是li还是ul
+                console.log(target.innerHTML);
+            }
+        };
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
