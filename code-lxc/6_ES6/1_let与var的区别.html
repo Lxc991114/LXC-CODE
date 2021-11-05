@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>var与let</title>
+</head>
+
+<body>
+    <ul>
+        <li class="li1">1</li>
+        <li class="li1">2</li>
+        <li class="li1">3</li>
+    </ul>
+
+    <ul>
+        <li class="li2">1</li>
+        <li class="li2">2</li>
+        <li class="li2">3</li>
+    </ul>
+
+
+    <script>
+        /* 1.是否可以重复声明变量 */
+        //（1）var 允许重复声明变量
+        // var aa = 'haha';
+        // var aa = 'xixi';
+        // console.log(aa); // xixi
+
+        // （2）let 不允许重复声明变量
+        // let bb = 'haha';
+        // let bb = 'xixi';
+        // console.log(bb);//Identifier 'bb' has already been declared
+
+        /* 2.变量提升问题 */
+        //（1）var ：undefined
+        // console.log(str);//undefined
+        // var str = 'hello';
+
+        // var str;
+        // console.log(str);//undefined
+        // str = 'hello';
+
+        //（2）let：报错不能定义变量，在初始化之前————不可变量提升
+        // console.log(str);//Cannot access 'str' before initialization
+        // let str = 'hello';
+
+        /* 3.let的块级作用域问题 */
+        //var 全局作用域、局部作用域
+        //let 全局作用域、局部作用域(块级作用域)
+        // if(true){
+        //   var a = 10;
+        // }
+        // console.log(a);//10
+
+        // if (true) {
+        //   let a = 10;
+        // }
+        // console.log(a);// a is not defined
+
+        // for (var i = 0; i < 3; i++) {
+        //   console.log(i);
+        // }
+        // console.log(i);//3
+
+        // for (let i = 0; i < 3; i++) {
+        //   console.log(i);
+        // }
+        // console.log(i);//i is not define
+
+        // 闭包：外部函数中声明了内部函数，内部函数中引用了外部函数中的局部变量，这样外部函数执行完毕后，内存不释放
+        var aLi1 = document.getElementsByClassName('li1');
+        for (var i = 0; i < aLi1.length; i++) {
+            (function (index) {
+                aLi1[index].onclick = function () {
+                    console.log(index);//每次都是 3
+                }
+            })(i);
+        }
+
+        var aLi2 = document.getElementsByClassName('li2');
+        for (let j = 0; j < aLi2.length; j++) {//块级作用域1
+            aLi2[j].onclick = function () {//块级作用域2
+                //作用域套作用域，产生了类似闭包的效果
+                console.log(j);//0 1 2
+            }
+        }
+
+        /*4.局部作用域内变量提升问题：都先在自己的作用域里去找，然后才回去看全局变量*/
+        // var a = 99;
+
+        // function fn1() {
+        //   console.log(a); //undefined  :  局部作用域内变量提升了
+        //   var a = 999;
+        // }
+        // fn1();
+
+        // let a = 99;
+
+        // function fn1() {
+        //   console.log(a); //Cannot access 'a' before initialization：暂时性死区
+        //   let a = 999;
+        // }
+        // fn1();
+
+    </script>
+
+</body>
+
+</html>

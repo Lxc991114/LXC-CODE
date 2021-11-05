@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构赋值</title>
+</head>
+
+<body>
+    <script>
+        /* 一.对象的解构 */
+        let obj = {
+            name: 'lisi',
+            age: 12
+        }
+        //(1)根据键解构对象
+        let { name, age } = { name: 'lisi', age: 13 }
+        console.log(name, age);//lisi 13
+        //(2)给键起别名解构对象:起别名后原名就不可以用了
+        let { name: aa, age: bb } = { name: 'lisi', age: 13 }
+        console.log(aa, bb);//lisi 13
+
+        /* 二.数组的解构 */
+        let aLi = [2, 4, 6];
+        //1.解构少时
+        let [a0, , a3] = [2, 4, 6];
+        console.log(a0, a3);//2 6
+        //2.解构多时
+        let [b0, b1, b2, b3] = [2, 4, 6]
+        console.log(b0, b1, b2, b3);//2 4 6 undefined
+
+        /* 数组解构的延伸 */
+        /* (1).变量的交换 */
+        let x = 111;
+        let y = 222;
+        [y, x] = [x, y];//将x，y放进数组中再解构出来，不可以用let[y,x]，因为重复声明变量了，所以直接修改即可
+        console.log(x, y);//222 111
+
+        /* (2).字符串的解构：数组解构的延伸 */
+        let [c1, c2, c3, c4, c5] = 'hellow'
+        console.log(c1, c2, c3, c4, c5);//h e l l o
+
+        /* (3).函数参数的解构：传参的时候直接将参数解构出来,数组解构的延伸 */
+        function fn([x, y, z]) {
+            console.log(x, y, z);//1 2 3
+        }
+        fn([1, 2, 3])
+
+        //给函数参数设置默认值
+        //(1)旧方法
+        function fn1([x, y, z]) {
+            z = z || 666;
+            console.log(x, y, z);//1 2 666
+        }
+        fn1([1, 2]);
+        //(2)新方法
+        function fn2([x, y, z = 999]) {
+            console.log(x, y, z);//1 2 999
+        }
+        fn2([1, 2]);
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

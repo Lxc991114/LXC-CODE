@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组的扩展————多看ES6手册！！</title>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        /* 1.创建数组的方式 */
+        //(1)直接设置
+        let arr1 = [1, 2, 3];
+        //(2)new Array()
+        let arr2 = new Array(5);
+        console.log(arr2);//[empty × 5]
+        let arr3 = new Array(4, 5, 6);
+        console.log(arr3);//[4,5,6]
+        //(3)将一组值转化为数组：Array.of()
+        let arr4 = Array.of(7, 8, 9);
+        console.log(arr4);//[7,8,9]
+
+
+        /* 2.类数组转变为数组 */
+        //(1)扩展运算符
+        //(2)Array.from()
+        var aLi = document.querySelectorAll('li');
+        var aLI = Array.from(aLi);
+        aLI.push('666');
+        console.log(aLI);// [li, li, li, "666"]
+
+
+        /* 3.找到第一个符合条件的数组成员、找到第一个符合条件的数组成员的索引 */
+        let arr5 = [3, 1, 2, 4, 5];
+        let a = arr5.find(function (val, key, arr) {
+            return val < 3;
+        })
+        console.log(a);//1
+        let b = arr5.findIndex(function (val, key, arr) {
+            return val < 3;
+        })
+        console.log(b);//1
+
+
+        /* 4.数组的遍历 */
+        let arr6 = [{
+            name: 'wangwu',
+            age: 22
+        }, {
+            name: 'shangsan',
+            age: 78
+        }, {
+            name: 'zhaosi',
+            age: 34
+        }, {
+            name: 'liuneng',
+            age: 96
+        }]
+
+        //(1)for循环
+
+        //(2)for of循环————类似于循环对象的for in
+        //循环数组
+        for (let obj of arr6) {
+            console.log(obj);
+        }
+        // keys()：单循环键
+        for (let key of arr6.keys()) {
+            console.log(key);
+        }
+        // values():单循环值
+        for (let value of arr6.values()) {
+            console.log(value);
+        }
+
+        // entries()：什么都循环
+        for (let [index, value] of arr6.entries()) {
+            console.log(index, value);
+        }
+
+        //(3)forEach循环:支持传三个值(值、索引、数组本身);没有返回值
+        arr6.forEach(function (val, index, arr) {
+            val.age += 1;
+        })
+        console.log(arr6);
+
+        //(4)map循环:支持传三个值(值、索引、数组本身);有返回值;内部可进行判断，满足筛选条件的找出，不满足的是undefined
+        let arr7 = arr6.map(function (val, index, arr) {
+            if (val.age > 34) {
+                return val.name;
+            }
+        })
+        console.log(arr7);//[undefined, "shangsan", "zhaosi", "liuneng"]
+        
+        //(5)filter循环：专门用来处理筛选的循环;有返回值
+        let arr8 = arr6.filter(function (val, index, arr) {
+            return val.age > 34;
+        })
+        console.log(arr8);
+    </script>
+</body>
+
+</html>

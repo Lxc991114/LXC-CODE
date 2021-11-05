@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象Map和WeakMap</title>
+</head>
+
+<body>
+  <script>
+    // 以Map(){key => value}形式存在
+
+    /* 一.Map() */
+    let m1 = new Map();
+
+    //（1）set()添加成员
+    m1.set('name', 'lisi');
+    m1.set('age', '66');
+    console.log(m1);
+
+    console.log(m1.size);
+
+    // （2）get()得到成员
+    console.log(m1.get('name'));
+
+    // （3）has() ————判断是否有某个成员
+    console.log(m1.has('name'));
+
+    // （4）delete()————返回值是boolean型
+    // console.log(m1.delete('name'));
+    // console.log(m1);
+
+    // （5）clear()————清空所有成员
+    // m1.clear();
+    // console.log(m1);
+
+    for (let [index, value] of m1.entries()) {
+      console.log(index, value);//age 66
+    }
+
+    /* 二.WeakMap() : 只能添加对象，并且键名只能是对象 */
+    let wm1 = new WeakMap();
+    wm1.set({ name: 'zhaosi' }, 'wangwu');
+    console.log(wm1);
+  </script>
+</body>
+
+</html>

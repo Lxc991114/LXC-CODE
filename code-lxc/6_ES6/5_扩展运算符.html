@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扩展运算符</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        /* 扩展运算符“...”的应用:数组和对象的应用基本一致 */
+
+        /* 一.接收剩余参数 */
+        //1.使用arguments时：不需设形参，直接用arguments接收函数
+        function fn1(x, y) {
+            console.log(arguments);//Arguments(5) [1, 2, 3, 4, 5, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+            console.log(arguments[1]);//2
+        }
+        fn1(1, 2, 3, 4, 5);
+        //2.使用扩展运算符时：需要设形参(在形参名前面加...)；形参名一般设为...rest；
+        function fn2(x, y, ...rest) {
+            console.log(rest);//[3, 4, 5]
+            console.log(rest[1]);//4
+        }
+        fn2(1, 2, 3, 4, 5)
+
+
+
+        /* 二.数组相关 */
+        /* 1.拷贝数组 */
+        //(1)一层数组
+        let arr1 = [2, 3, 4];
+        let arr2 = [...arr1];
+        arr1[1] = 999;
+        console.log(arr2);//[2,3,4]
+        //(2)多层数组————不可使用扩展运算符拷贝，扩展运算符是浅拷贝
+        let arr3 = [2, 3, [4, 5, 6]];
+        let arr4 = [...arr3];
+        arr3[2][1] = 999;
+        console.log(arr4);//[2,3,[4,999,6]]
+
+        /* 2.将多个数组连接 */
+        let arr5 = [4, 5];
+        let arr6 = [5, 7, 8];
+        let arr7 = [...arr5, ...arr6];
+        console.log(arr7);
+
+        /* 3.让一个数组作为另一个数组的一部分,是将一个数组的数放进另一个数组，而不是整个数组放进另一个数组 */
+        let arr8 = [1, 2, 3, 4, 5];
+        let arr9 = [2, ...arr8, 3, 4];// [2, 1, 2, 3, 4, 5, 3, 4]
+        console.log(arr9);
+
+        /* 4.把伪数组(类数组)转换为数组 */
+        var aLi = document.querySelectorAll('li');
+        var aLI = [...aLi];
+        aLI.push(888);
+        console.log(aLI);//[li, li, li, 888]
+
+
+        /* 三.对象相关 */
+        /* 1.拷贝对象 */
+        //(1)一层对象
+        let obj1 = { name: 'lisi', age: 13 };
+        let obj2 = { ...obj1 };
+        obj1.name = 'wangwu';
+        console.log(obj1.name);//wangwu
+        console.log(obj2.name);//lisi
+        //(2)多层对象————不可使用扩展运算符拷贝，扩展运算符是浅拷贝
+        let obj3 = {
+            name: 'lisi',
+            age: 13,
+            brother: {
+                name: 'hahaha',
+                age: 13
+            }
+        };
+        let obj4 = { ...obj3 };
+        obj3.brother.name = 'wangwu';
+        console.log(obj3.brother.name);//wangwu
+        console.log(obj4.brother.name);//wangwu
+
+        /* 2.将多个对象连接: 如果属性名重读的话，则后面的覆盖前面的 */
+        let obj5 = { name: 'lisi', age: 34 };
+        let obj6 = { sex: 'female', age: 23 };
+        let obj7 = { ...obj5, ...obj6, school: '哈理工' };//可以在连接时直接加入新的属性
+        console.log(obj7);
+
+        /* 3.将对象作为另一个对象的一部分 */
+        let obj8 = { name: 'hahahha', age: 13 };
+        let obj9 = { student: 'xixixixi', road: 15 };
+        let obj10 = { ...obj8, ...obj9 };
+        console.log(obj10);//{name: "hahahha", age: 13, student: "xixixixi", road: 15}
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

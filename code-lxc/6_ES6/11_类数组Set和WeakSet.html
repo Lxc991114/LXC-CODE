@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类数组Set和WeakSet</title>
+</head>
+
+<body>
+    <script>
+        /* 一.Set() */
+        let arr1 = [1, 1, 1, 2, 2, 3, 3, 3, 4, 5, 5];
+
+        /* 1.给数组去重 */
+        //(1)Set不允许数组中有重复，但是会将数组结构改变
+        let arr2 = new Set(arr1);
+        console.log(arr2);
+        //(2)将类数组Set变回数组
+        let arr3 = [...arr2];
+        console.log(arr3);
+        //一步简化数组去重
+        let arr4 = [...new Set(arr1)];
+        console.log(arr4);
+
+        /* 2.类数组Set的一些属性、方法 */
+        //（1）size属性
+        console.log(arr2.size);
+
+        //（2）add()————会返回更改后的Set,所以可以直接打印arr2.add(666)
+        console.log(arr2.add(666));
+
+        //（3）delete()————返回值是boolean型
+        console.log(arr2.delete(1));//true
+        console.log(arr2);
+
+        //（4）has()————判断是否有某个成员
+        console.log(arr2.has(999));//false
+
+        //（5）clear()————清空所有成员
+        //console.log(arr2.clear());————clear没有返回值，不可以直接打印
+        //应该这样使用clear()
+        //arr2.clear();
+        // console.log(arr2);
+
+        //（6）for of循环
+        for (let [index, value] of arr2.entries()) {
+            console.log(index, value);//Set类数组的index与value一致
+        }
+
+        /* 二.WeakSet() : 和 set 类似，但是只能添加对象*/
+        let ws1 = new WeakSet();
+        let obj = {
+            name: 'lisi',
+            age: 33
+        }
+        ws1.add(obj);
+        console.log(ws1);
+
+
+
+    </script>
+</body>
+
+</html>

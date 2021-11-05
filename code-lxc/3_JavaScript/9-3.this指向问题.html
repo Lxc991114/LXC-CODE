@@ -9,34 +9,78 @@
 </head>
 
 <body>
+    <button id="btn">BTN</button>
+    <ul>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+    </ul>
 
     <script>
-        /* this指向当前对象,辨别this的指向，要看离this最近的function是属于哪个对象的 */
-        /* 1.对象中的this */
-        var obj1 = {
-            name: 'lisi',
-            age: 13,
-            sayHellow: function () {
-                console.log(this);//打印出该对象
-            }
-        }
-        obj1.sayHellow()
 
-        /* 2.普通函数中的this */
+        /* this的指向问题：
+            1.事件处理函数中：绑定事件的dom元素
+            2.延迟器中：window
+            3.自定义函数：window
+            4.自定义对象中：自定义对象
+            5.类中：实例化出的对象
+            6.箭头函数(es6中)：
+            箭头函数中的 this，指向的是定义时所在的对象，而不是使用时所在的对象
+            箭头函数自身没有this，父作用域中的this是谁，箭头函数中的this就指向谁
+            如果箭头函数被非箭头函数包含，则 this指向的就是最近一层非箭头函数中的this，否则指向的就是全局对象（window）
+        */
+        //this指向当前对象,辨别this的指向，要看离this最近的function是属于哪个对象的
+
+
+        var aa = 555;//定义一个全局变量，可知全局变量也是存放在window对象中，相当于window的属性
+        console.log(window.aa);
+
+        /* 1.事件处理函数中 */
+        var oBtn = document.getElementById('btn');
+        oBtn.onclick = function () {
+            console.log(this);//按钮
+        }
+
+        /* 2.全局下方法中 */
+        setTimeout(function () {
+            console.log(this);//打印出全局的window对象
+        }, 1000)
+
+        /* 3.自定义函数中 */
         function test1() {
             console.log(this);//打印出全局的window对象
         }
         test1();
 
-        var aa = 555;//定义一个全局变量，可知全局变量也是存放在window对象中，相当于window的属性
-        console.log(window.aa);
+        /* 4.自定义对象中 */
+        var obj1 = {
+            name: 'lisi',
+            age: 13,
+            sayHellow: function () {
+                console.log(this);//打印出该自定义对象
+            }
+        }
+        obj1.sayHellow()
 
-        /* 3.全局下方法中的this */
-        setTimeout(function () {
-            console.log(this);//打印出全局的window对象
-        }, 1000)
+        /* 5.类中 */
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            console.log(this);//p1
+        }
+        let p1 = new Person('lisi', 89);
+
+        /* 6.箭头函数中 */
+        var aLi = document.getElementsByTagName('li');
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].onclick = function () {
+                setTimeout(() => {
+                    console.log(this); //<li>..</li>
+                }, 1000);
+            }
+        }
     </script>
-    
+
 </body>
 
 </html>

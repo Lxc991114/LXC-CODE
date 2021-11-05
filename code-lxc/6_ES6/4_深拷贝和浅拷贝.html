@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝和浅拷贝</title>
+</head>
+
+<body>
+    <script>
+        /* 1.赋值(传引用) */
+        let obj1 = {
+            name: 'lisi',
+            age: 12
+        }
+        let obj2 = obj1;// 这是传引用，不是拷贝,obj2的箭头指向obj1的堆内存
+        obj2.name = 'wangwu';//obj1和obj2对应同一个地方的引用，修改会一起改变
+        console.log(obj1);//name被改成wangwu、
+
+        /* 2.拷贝(clone) */
+        //（1）浅拷贝：只拷贝一层
+        let obj3 = {
+            name: 'xixixi',
+            age: 10
+        }
+        //克隆方法
+        function clone1(obj) {
+            //定义一个空对象
+            let objNew1 = {};
+            //将obj3中的每个属性都循环出来,循环对象用for( in )
+            for (let params in obj3) {
+                objNew1[params] = obj3[params];//循环出来的属性是变量，应该用对象[变量]而不是对象.属性，相当于把变量存进对象中
+            }
+            return objNew1;
+        }
+
+        let obj4 = clone1(obj3);
+        obj3.name = 'wangwu';
+        console.log(obj3);//{name: "wangwu", age: 10}
+        console.log(obj4);//{name: "xixixi", age: 10}
+
+        //（2）深拷贝：拷贝多层
+        let obj5 = {
+            name: 'xixixi',
+            age: 10,
+            borther : {
+                name: 'hahaha',
+                age: 11
+            }//因为有此处，如果使用浅拷贝中方法，又相当于传引用
+        }
+        //克隆方法
+        function clone2(obj) {
+            //下面使用typeof的时候，如果返回的是数组，也是对象类型，因此在此处判断一下是对象还是数组
+            let objNew2 = obj instanceof Array ? [] : {};
+            //也可以用这种方法let o = obj.constructor === Array ? [] : {};
+
+            //将obj5中的每个属性都循环出来,循环对象用for( in )
+            for (let params in obj) {
+                if (typeof obj[params] === 'object') {
+                    //再进行一次对象的循环：使用递归(函数里面调用自己)
+                    objNew2[params] = clone2(obj[params]);
+                } else {
+                    objNew2[params] = obj[params];
+                }
+            }
+            return objNew2;
+        }
+        let obj6 = clone2(obj5);
+        obj5.age = 66;
+        console.log(obj5);
+        console.log(obj6);
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

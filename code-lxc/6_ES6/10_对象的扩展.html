@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象的扩展</title>
+</head>
+
+<body>
+    <script>
+        /* 1.当属性名和变量名相同时，对象可以简写 */
+        let name = 'lisi';
+        let age = 55;
+        let obj1 = {
+            name: name,
+            age: age
+        };
+        console.log(obj1);
+        let obj2 = {
+            name,
+            age
+        }
+        console.log(obj2);
+
+        /* 2.属性名表达式[] */
+        let xxx = 'myname';
+        let obj3 = {
+            name: 'zhaosi',
+            age: 77,
+            [xxx + '666']: 'wangwu'
+        }
+        console.log(obj3);
+
+        /* 3.Object.is(): 返回结果和===基本一致 */
+        console.log('111' === 111); // flase
+        console.log(Object.is('111', 111)); // flase
+
+        console.log(+0 === -0); // true
+        console.log(Object.is(+0, -0)); // flase
+
+        console.log(NaN === NaN); //false
+        console.log(Object.is(NaN, NaN));//true
+
+        /* 4.对象的合并: Object.assign()———— 浅拷贝！！！*/
+        let target = { a: 1, b: 1 };
+        let source1 = { b: 2, c: 2 };
+        let source2 = { c: 3 };
+        var all = Object.assign(target, source1, source2);
+        console.log(all);//相同的属性，后面的值会把前面的值覆盖
+
+        /* 5.判断对象中是否包含某个属性 */
+        console.log('name' in obj1);
+
+        /* 6.对象的遍历 */
+        for (let p in obj1) {
+            console.log(p); // 属性名
+            console.log(obj1[p]);//属性值
+        }
+        console.log(Object.keys(obj1));
+        console.log(Object.values(obj1));
+        console.log(Object.entries(obj1));
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

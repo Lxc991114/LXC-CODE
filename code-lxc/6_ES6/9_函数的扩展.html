@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数的扩展</title>
+</head>
+
+<body>
+    <script>
+        /* 1.新增读函数名和函数参数的属性 */
+        function fn1(x, y, z = 888) {
+            console.log(x, y, z);
+        }
+        fn1(1, 2, 3, 4)
+        console.log(fn1.name);//fn1
+        console.log(fn1.length);//2——长度不算设置的默认值
+
+        /* 2.箭头函数 */
+        let fn2 = (params) => {
+            console.log(params);
+        }
+        fn2('这是箭头函数');
+
+        //箭头函数的this指向实例:
+        //箭头函数中的 this，指向的是定义时所在的对象，而不是使用时所在的对象
+        //箭头函数(es6中)：箭头函数自身没有this，父作用域中的this是谁，箭头函数中的this就指向谁
+        //如果箭头函数被非箭头函数包含，则 this指向的就是最近一层非箭头函数中的this，否则指向的就是全局对象（window）
+        //(1)
+        let obj5 = {
+            name: 'obj5',
+            study: function () {
+                console.log(this);//obj5
+                let obj6 = {
+                    name: 'obj6',
+                    code: () => {
+                        console.log(this);//obj5
+                    }
+                }
+                obj6.code();
+            }
+        }
+        obj5.study();
+        //(2)
+        let obj7 = {
+            name: 'obj7',
+            study: function () {
+                console.log(this);//obj7
+                setTimeout(function () {
+                    let obj6 = {
+                        name: 'obj8',
+                        code: () => {
+                            console.log(this);//window
+                        }
+                    }
+                    obj6.code();
+                }, 1000);
+            }
+        }
+        obj7.study();
+        //(3)
+        let obj9 = {
+            name: 'obj9',
+            study: function () {
+                console.log(this);//obj9
+                setTimeout(() => {
+                    let obj10 = {
+                        name: 'obj10',
+                        code: () => {
+                            console.log(this);//obj9
+                        }
+                    }
+                    obj10.code();
+                }, 1000);
+            }
+        }
+        obj9.study();
+        //(4)
+        let obj11 = {
+            name: 'obj11',
+            study: () => {
+                console.log(this);//window
+                setTimeout(() => {
+                    let obj12 = {
+                        name: 'obj12',
+                        code: () => {
+                            console.log(this);//window
+                        }
+                    }
+                    obj12.code();
+                }, 1000);
+            }
+        }
+        obj11.study();
+
+
+
+
+    </script>
+</body>
+
+</html>
