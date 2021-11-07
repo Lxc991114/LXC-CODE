@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表练习</title>
+    <style>
+        .div1 {
+            color: blue
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="" v-model='msg' @keyon="search">
+        <button @click="add">添加</button>
+        <ul>
+            <li v-for="(item,index) of showList" :class='{div1:item.isActive}'>
+                <!-- 为了防止点击按钮点到li，使得样式传递给删除元素的下一个元素，所以将内容单放到标签中 -->
+                <span @click="change(item)">{{item.content}}</span>
+                <button @click="del(index)">删除</button>
+            </li>
+        </ul>
+    </div>
+    <script src="./vue .js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '',
+                isActive: false,
+                list: [
+                    {
+                        content: '蔡徐坤',
+                        isActive: false
+                    },
+                    {
+                        content: '范丞丞',
+                        isActive: true
+
+                    },
+                    {
+                        content: '小鬼',
+                        isActive: false
+
+                    },
+                    {
+                        content: '王子异',
+                        isActive: false
+                    }
+                ],
+                showList: [
+                    {
+                        content: '蔡徐坤',
+                        isActive: false
+                    },
+                    {
+                        content: '范丞丞',
+                        isActive: true
+
+                    },
+                    {
+                        content: '小鬼',
+                        isActive: false
+
+                    },
+                    {
+                        content: '王子异',
+                        isActive: false
+                    }
+                ]
+            },
+            methods: {
+                /* 1.添加内容 */
+                add() {
+                    this.list.push({
+                        content: this.msg,
+                        isActive: false
+                    })
+                    //始终保持显示的列表和真正的列表内容一致
+                    this.showList = [...this.list];
+                    this.msg = ''
+                },
+                /* 2.改变状态 */
+                change(item) {
+                    item.isActive = !item.isActive
+                },
+                /* 2.删除内容 */
+                del(index) {
+                    //在数组中删除内容
+                    this.list.splice(index, 1);
+                    //始终保持显示的列表和真正的列表内容一致
+                    this.showList = [...this.list];
+                },
+                /* 3.筛选内容 */
+                search() {
+                    //因为filter方法有返回值，所以将这个方法的返回值赋值给一个变量
+                    /*  this.list = this.list.filter((value) => {
+                         return value.content.includes(this.msg)
+                     }) ——————这样操作下面就只会显示筛选出来的列表，替换了显示出来的全部的列表
+                     解决方法：应该有两套一样的列表，一套展示、一套是筛选之后的列表,循环展示的应该也是showList
+                     */
+                    this.showList = this.list.filter((value) => {
+                        return value.content.includes(this.msg)
+                    })
+                }
+
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>

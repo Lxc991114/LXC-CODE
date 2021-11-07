@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-bind</title>
+  <style>
+    .div1 {
+      color: rosybrown;
+    }
+
+    .div2 {
+      font-size: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- v-bind (缩写用“:”):动态控制属性 -->
+    <!-- 可以绑定vue实例中的属性和方法 -->
+    <!-- 1.控制属性 -->
+    <!-- （1）类均被动态控制：用对象的方式展现 -->
+    <div v-bind:class="{div1:isDiv1, div2:isDiv2}">div1</div>
+    <!-- （2）一个类固定，一个类动态被控制：用数组的方式展现 -->
+    <div :class="['div1', isDiv2? 'div2' : '' ]">div2</div>
+
+    <!-- 2.控制自定义属性index -->
+    <div :index="index666"></div>
+  </div>
+
+  <script src="./vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        isDiv1: false,
+        isDiv2: false,
+        index666: 888
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <!-- 循环谁就在谁上加v-for
+                循环数组建议用for of
+                循环对象建议用for in
+            -->
+            <li v-for="(student,index) of students">
+                <span>序号：{{index + 1}} </span><!-- 索引是直接循环出来的 -->
+                <span>姓名：{{student.name}} </span>
+                <span>年龄：{{student.age}} </span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./vue .js"></script>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                students: [
+                    {
+                        name: 'lisi',
+                        age: 12
+                    },
+                    {
+                        name: 'wangwu',
+                        age: 13
+                    },
+                    {
+                        name: 'zhangliu',
+                        age: 14
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

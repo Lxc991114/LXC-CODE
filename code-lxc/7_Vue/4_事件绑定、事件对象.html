@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on、$event</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Vue中直接用v-on:来绑定事件(或者用@绑定)：传参也直接在调用的时候传参即可
+            如果需要拿事件对象，就在传实参的时候传$event(必须是$event，不可叫其他名字)即可
+            传了$event，如何在方法中打印出事件对象：
+            (1)方法中没有给事件对象设置相应形参:   console.log(event);
+            (2)方法中给事件对象设置相应形参:   console.log(形参名);
+        -->
+        <button v-on:click="add('这是参数',$event)">点击按钮就多一个li</button>
+        <ul>
+            <li v-for="(student,index) of students">
+                <span>序号：{{index + 1}} </span>
+                <span>姓名：{{student.name}} </span>
+                <span>年龄：{{student.age}} </span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./vue .js"></script>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                students: [
+                    {
+                        name: 'lisi',
+                        age: 12
+                    },
+                    {
+                        name: 'wangwu',
+                        age: 13
+                    },
+                    {
+                        name: 'zhangliu',
+                        age: 14
+                    }
+                ]
+            },
+            methods: {
+                add(str, e) {
+                    this.students.push(
+                        {
+                            name: 'luoqi',
+                            age: 15
+                        }
+                    )
+                    console.log(str);
+                    /* 如何拿到传进来的事件对象 */
+                    //1.有形参的时候
+                    console.log(e);
+                    //2.没有形参的时候
+                    console.log(event);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

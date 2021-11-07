@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue的使用</title>
+</head>
+
+<body>
+
+    <div id="app">{{msg}}</div><!-- 此处也可以直接用双花括号包裹着直接调用下面的方法 -->
+    <div id="noapp">{{msg}}</div><!-- 没有挂载的元素绑定数据不成功 -->
+
+    <!-- Vue将我们从频繁的Dom操作中解放出来，频繁的dom操作是耗费性能的、低效的
+        传统的项目的模式是MVC模式，Vue是MVVM模式(数据层、视图层双向数据绑定) -->
+    <!-- 1.引入vue中文文档中下载下来的开发者版本的vue.js文件 -->
+    <script src="./vue .js"></script>
+    <script>
+        //2.创建vue
+        let vm = new Vue({
+            //3.确定要挂载的元素(需要放在el属性中)
+            el: '#app',
+            //4.声明绑定的数据(需要放在data对象中)
+            data: {
+                msg: 'hellow Vue'
+            },
+            //5.简单的需要计算的属性可以写在computed对象中，从而不去写一个新的方法————视需求选择是否需要
+            computed:{//写在计算属性中的属性，必须写成方法的形式
+                //计算属性必须要有返回值
+                //只有在计算所需的相关依赖发生变化时，才会重新计算
+            },
+            //6.声明绑定的方法(需要放在methods对象中)
+            //在methods里的方法的this指向vm(实例化的 vue 对象)，直接用this.属性就可拿到，不需要this.data.属性
+            methods: {
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>

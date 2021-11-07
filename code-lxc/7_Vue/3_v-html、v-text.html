@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-html、v-text</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 1.此种方式在快速刷新时网页中可看到{{msg}} -->
+        <span>{{msg}}</span>
+
+        <!-- 2.以下方式在快速刷新时网页中看不到{{msg}} -->
+        <span v-text='msg'></span>
+        <span v-html='msg'></span>
+    </div>
+
+    
+    <script src="./vue .js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: ' <a href="">点我</a> '
+            }
+        })
+    </script>
+
+</body>
+
+</html>

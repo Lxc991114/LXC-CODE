@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命周期</title>
+</head>
+
+<body>
+  <div id="app">
+    {{ msg }}
+    <button @click="change">变</button>
+    <button @click=" del">销毁</button>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello word'
+      },
+      methods: {
+        /* 触发beforeUpdate()、updated() */
+        change() {
+          this.msg += '6';
+        },
+        /* 触发beforeDestroy()、destroyed() */
+        del() {
+          /* vm取得整个vue实例 */
+          vm.$destroy();
+        }
+      },
+      /* 生命周期与data、methods同级 */
+      /* 想从生命周期中取到el和data，应该用this.$el、this.$data */
+
+      /* 生命周期都可以在什么时候调用： */
+
+      // （1）Vue实例创建之前：只能操作自己写的内容
+      beforeCreate() {
+        console.log('--------------beforeCreate-------------');
+        console.log('el', this.$el); //undefined
+        console.log('data', this.$data); // undefined
+        console.log('innerHTML', document.getElementById('app').innerHTML); // {{ msg }}
+      },
+      // （2）Vue实例创建成功后：此时 data 中的数据显示出来了
+      created() {
+        console.log('--------------created-------------');
+        console.log('el', this.$el); //undefined
+        console.log('data', this.$data); // 有了
+        console.log('innerHTML', document.getElementById('app').innerHTML); // {{ msg }}
+      },
+      // （3）Vue实例载入前：数据中的data在模板中先占了一个位置
+      beforeMount() {
+        console.log('--------------beforeMount-------------');
+        console.log('el', this.$el); //<div id="app">{{ msg }}</div>//此例子是msg先在模板中占了个位置
+        console.log('data', this.$data); // 有了
+        console.log('innerHTML', document.getElementById('app').innerHTML); // {{ msg }}
+      },
+      // （4）Vue实例载入后：模板中的 data 数据显示出来了(初次渲染完成)
+      mounted() {
+        console.log('--------------mounted-------------');
+        console.log('el', this.$el); //<div id="app">hello word</div>
+        console.log('data', this.$data); // 有了
+        console.log('innerHTML', document.getElementById('app').innerHTML); // hello word
+      },
+      /* —————————————————————————————————————————— 页面初始化加载就执行到mounted()结束 —————————————————————————————————————————————————————— */
+
+      /* ————————————————————————————————————— beforeUpdate()、updated()在data有修改时才会触发 ———————————————————————————————————————————————— */
+      // （5）Vue实例更新前：当 data 中的数据发生变化时调用，虚拟 dom (el里的内容)改变了，真实 dom (真实结构)没变，虚拟dom还未替换真实dom
+      beforeUpdate() {
+        console.log('--------------beforeUpdate-------------');
+        console.log('el', this.$el); //<div id="app">hello word6</div>
+        console.log('data', this.$data); // hello word6
+        console.log('innerHTML', document.getElementById('app').innerHTML); // hello word
+      },
+      // （6）Vue实例更新后：真实 dom 改变完成
+      updated() {
+        console.log('--------------updated-------------');
+        console.log('el', this.$el); //<div id="app">hello word6</div>
+        console.log('data', this.$data); // hello word6
+        console.log('innerHTML', document.getElementById('app').innerHTML); // hello word6
+      },
+
+      /* ————————————————————————————————————— beforeDestroy()、destroyed()执行销毁时时才会触发 ———————————————————————————————————————————————— */
+
+      // （7）Vue实例销毁前：什么都没变，都可以正常使用
+      beforeDestroy() {
+        console.log('--------------beforeDestroy-------------');
+        console.log('el', this.$el); //<div id="app">hello word6</div>
+        console.log('data', this.$data); // hello word6
+        console.log('innerHTML', document.getElementById('app').innerHTML); // hello word6
+      },
+      // （8）Vue实例销毁后：打印的东西还能正常打印，但是无法再进行其他操作，vue实例中的所有东西都会解绑定，所有时间监听器会被移除，所有的子实例也会被销毁
+      destroyed() {
+        console.log('--------------destroyed-------------');
+        console.log('el', this.$el); //<div id="app">hello word6</div>
+        console.log('data', this.$data); // hello word6
+        console.log('innerHTML', document.getElementById('app').innerHTML); // hello word6
+      }
+
+
+
+
+
+
+    })
+
+  </script>
+</body>
+
+</html>

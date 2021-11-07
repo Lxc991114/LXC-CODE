@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <!-- 避免一个元素更改，整个li都重新渲染：
+        通过这个key是独一无二的值(可设置为索引)，就可知道改了什么，只改那一个，而不是整个重新渲染
+      -->
+      <li v-for="(item,index) of list" :key="index">
+        {{ item }}
+      </li>
+      <button @click="change">变</button>
+    </ul>
+  </div>
+
+  <script src="./vue.js"></script>
+
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        list: [1, 2, 3, 5, 4]
+      },
+      methods: {
+        change() {
+          /*Vue中识别数组：
+          看的是指向堆内存的地址是否修改，不会去比对堆内存中每个元素是否更改
+          */
+
+          /* 改变数组的方式 */
+          //1.修改了元素，但页面未渲染：在vue工具中可看到data中的数据改变了，但是网页中的页面未被渲染
+          // this.list[3] = 666;
+
+          //2.修改了元素，页面重新被渲染：在vue工具中可看到data中的数据改变了，网页中的页面也重新被渲染
+          //第一个参数：修改的哪个数组，第二个参数：修改的参数对应的索引，第三个参数：修改成什么样的值
+          //（1） 
+          //Vue.set(this.list, 3, 666);
+          //（2）
+          this.$set(this.list, 3, 999);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

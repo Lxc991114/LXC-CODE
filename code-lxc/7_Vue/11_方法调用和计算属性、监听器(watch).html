@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方法调用、计算属性、监听器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            width: 300px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        ul {
+            border-bottom: 1px solid black;
+        }
+
+        li {
+            list-style: none;
+            height: 50px;
+            background-color: rgb(243, 10, 224);
+            margin: 10px 0;
+            padding: 0 10px;
+            line-height: 50px;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .active {
+            background-color: chartreuse;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>商品列表</h1>
+        <ul>
+            <li v-for="(item,index) of list" :key="index" @click='change(item)' :class='{active:item.isActive}'>
+                <span>{{item.name}}</span>
+                <span>{{item.price}}</span>
+            </li>
+        </ul>
+        <h2>总计：{{sum()}}</h2><!-- 1.方法调用 -->
+        <h2>总计：{{ total }}</h2><!-- 2.计算属性 -->  <!--  -->
+        <input v-model="msg" type="text" /><!-- 3.比较两者的区别 -->
+        <!-- 计算属性和方法调用的区别：
+            （1）方法调用：每当触发页面重新渲染时（data 当中有数据改变），方法就会被调用；
+            （2）计算属性：只有在计算所需的相关依赖发生变化时，才会重新计算；
+        -->
+    </div>
+    <script src="./vue .js"></script>
+
+    <script>
+        let vm = new new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    {
+                        name: '衬衫',
+                        price: 999,
+                        isActive: false
+                    },
+                    {
+                        name: '电脑',
+                        price: 13800,
+                        isActive: false
+                    },
+                    {
+                        name: '裙子',
+                        price: 1999,
+                        isActive: false
+                    },
+                    {
+                        name: '裤子',
+                        price: 888,
+                        isActive: false
+                    },
+                ],
+            },
+            computed: {
+                // 计算属性必须有返回值
+                total() {
+                    let count = 0;
+                    this.list.forEach(value => {
+                        if (value.isActive === true) {
+                            count += value.price
+                        }
+                    });
+                    console.log('计算所需的相关依赖发生变化时，才会重新计算');
+                    return count;
+                }
+            },
+            methods: {
+                change(obj) {
+                    obj.isActive = !obj.isActive;
+                },
+                sum() {
+                    //定义价格初始值
+                    let count = 0;
+                    this.list.forEach(value => {
+                        if (value.isActive === true) {
+                            count += value.price;
+                        }
+                    })
+                    console.log('页面一重新渲染就会调用该方法');
+                    return count;
+                }
+            },
+            // watch：监听属性的变化，被检测的属性一旦发生改变就会触发对应的方法
+            watch: {
+                msg: function (newVal, oldVal) {
+                    //如果想对改之前和改之后进行一些判断，可以使用监听器
+                    console.log(newVal, oldVal);
+                }
+            }
+
+        })
+
+    </script>
+
+</body>
+
+</html>

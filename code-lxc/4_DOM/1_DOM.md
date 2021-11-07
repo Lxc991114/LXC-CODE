@@ -73,7 +73,7 @@ b.window.event.cancelBubble = true
 # 事件绑定
 （1）解决事件多次绑定后面代码覆盖前面代码的问题
 标准浏览器可使用：addEventListener()——————（1）事件监听
-ie浏览器中可使用：attachEvent()——————（2）事件捕捉
+ie浏览器中可使用：attachEvent()——————（2）事件捕获
 （2）取消事件绑定
 a.对普通事件绑定的取消
 将事件绑定设为null

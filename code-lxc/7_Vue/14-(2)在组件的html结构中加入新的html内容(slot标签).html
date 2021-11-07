@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slot标签</title>
+</head>
+
+<body>
+  <!-- 以局部组件为例注册组件 -->
+
+  <!-- 使用组件的部分——————父组件 -->
+  <div id="app">
+    <my-com :msg="msg">
+      <!-- 除了组件自带的结构，还想往里面加一些结构
+      （1）方法1：<h3>haha</h3>————页面中不会显示
+      （2）方法2：slot标签来接收调用组件时自定义的html的部分
+      -->
+      <h3 slot="slot1">haha</h3>
+      <h5 slot="slot2">lala</h5>
+    </my-com>
+  </div>
+
+  <!-- 组件的html结构，属于声明组件的部分——————子组件 -->
+  <template id="my-com">
+    <!-- 组件中的内容需要大div标签包裹 -->
+    <div>
+      <slot name="slot1"></slot>
+      <!--1. 组件属性的显示 -->
+      <h1>组件</h1>
+      <p>{{ msg }}</p>
+      <p>{{ title }}</p>
+      <p>{{ count }}</p>
+      <!-- 2.组件对象的显示 -->
+      <button @click="add">+++</button>
+      <slot name="slot2"></slot>
+    </div>
+  </template>
+
+  <script src="./vue .js"></script>
+
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello word'
+      },
+      components: {
+        'myCom': {
+          template: '#my-com',
+          props: ['msg'],
+          //组件是要复用的，为了避免组件之间的 data 互相干扰，采用函数返回值的方式定义组件中的data 
+          data() {
+            return {
+              title: '这是组件',
+              count: 0
+            }
+          },
+          methods: {
+            add() {
+              this.count++;
+            }
+          }
+        }
+      }
+
+    })
+  </script>
+</body>
+
+</html>

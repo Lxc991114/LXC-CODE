@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局组件和局部组件、父组件向子组件通信</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- （1）使用全局组件：传参数用属性来传 -->
+        <my-com title="全局组件" :message="msg"></my-com><!-- 此处msg是变量，因此需要v-bind绑定 -->
+    </div>
+
+    <div id="app1">
+        <my-com title="全局组件" :msg="msg"></my-com>
+        <!-- （1）使用局部组件：传参数用属性来传 -->
+        <tpl1 title="局部组件" :msg="msg"></tpl1>
+    </div>
+
+    <script src="./vue .js"></script>
+    <script>
+        /*  （1）声明全局组件 */
+        Vue.component('myCom', {
+            template: '<div> {{ title }}  {{msg}} </div>',
+            props: ['title', 'msg']//接收参数————相当于形参
+        })
+        let vm1 = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello word'
+            }
+        })
+
+        // （2）声明局部组件
+        let vm2 = new Vue({
+            el: '#app1',
+            data: {
+                msg: 'hello 666'
+            },
+            components: {
+                'tpl1': {
+                    template: '<div> {{ title }}  {{message} </div>',
+                    props: ['title', 'message']//接收参数——————相当于形参
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

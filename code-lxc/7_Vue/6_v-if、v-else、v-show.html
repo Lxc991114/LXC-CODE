@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-if、v-else、v-show</title>
+</head>
+
+<body>
+  <div id="app">
+    <button v-on:click="change">真假改变</button>
+
+    <!-- v-if、v-else、v-show都是判断布尔值 -->
+    <!-- 1.v-if、v-else：通过元素是否存在dom中决定我们是否能看到他 -->
+    <!-- 必须紧连着 -->
+    <p v-if="tag">tag是 true</p>
+    <p v-else>tag是 false</p>
+
+    <!-- 2.v-show：通过元素的display这个属性是显示还是隐藏决定我们是否能看到她 -->
+    <!-- 如果需要频繁的显示和隐藏，v-show比v-if更好，更高效，更不耗费性能 -->
+    <p v-show="tag">v-show</p>
+  </div>
+
+  <script src="./vue .js"></script>
+
+  <script>
+    let vm = new Vue({
+
+      el: '#app',
+      data: {
+        tag: false,
+      },
+      methods: {
+        change() {
+          this.tag = !this.tag;
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
