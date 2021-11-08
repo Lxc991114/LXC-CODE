@@ -4,7 +4,7 @@
 1.基于node(下载node后可使用npm等命令)
 2.在任意文件夹下安装————只可全局安装，安装在哪个文件夹下均可，查看版本号
 3.创建项目
-（1）命令行创建：vue 项目名
+（1）命令行创建：vue create 项目名
 （2）图形化创建：vue ui
 4.运行项目：npm run serve
 
@@ -21,7 +21,7 @@ Vue VSCode Snippets:使用一些快捷键可快速生成vue模板，使用vbase�
 3.public文件夹：项目中用到的一些东西可能和webpack冲突，该文件夹下的东西会在打包的过程中原封不动的放在打包后的dist文件夹下面，不会经过webpack的操作，一般不会去做该文件夹下的内容
 注：webpack所有配置都写在webpack…的文件里，文件隐藏了，如果想更改一些配置，就需要输命令，让文件显示出来再配置，但一旦显示出来就没法自己更新了，以后所有东西都需要手动配置
 4.src文件夹:开发所需的文件结构
-（1）assets文件夹：放静态资源————css、js、imgs文件夹
+（1）assets文件夹：放静态资源————css、js、imgs文件夹等
 （2）components文件夹：所有页面需要公共用到的组件
 （3）router文件夹：配置路由————可实现单页面应用
 index.js文件相当于路由表，项目中所要用到的所有页面都需要在这里面配置
@@ -32,7 +32,7 @@ index.js文件相当于路由表，项目中所要用到的所有页面都需要
 scoped是绑定的意思，意为整个页面都与该样式绑定，也只会在该文件里应用，打包时不会和其他文件错乱
 </style>
 （6）App.vue：所有views文件夹下的页面都是写在App.vue里面的，实现单页面应用，所有其他页面都是App.vue的组件
-（7）main.js：主入口文件，声明vue实例，所有的页面都相当于它的组件
+（7）main.js：主入口文件，声明vue实例，所有的页面都相当于它的组件，需要全局使用的css、js等文件都应该引入main.js
 5.browerslistrc：配置编译的时候兼容的浏览器的版本
 6.eslintrc：规范
 7.gitignore：
@@ -47,6 +47,13 @@ devDependencies：开发时需要依赖的包
 ### Vue CLI具体使用
 
 # 🍎(1)# <router-view/>：想让内容显示在哪里，就在哪里写，与slot标签类似
+该标签也可以加样式，例如：
+header、footer固定定位后释放空间，因此让页面使用上下外边距将header和footer的高度让出来即可
+<router-view class="main" />
+.main {
+  margin: 高度 0;
+}
+
 
 
 # 🍎(2)vue-router
@@ -56,7 +63,13 @@ devDependencies：开发时需要依赖的包
 
 # 每一个页面都相当于组件，因此其中的data应该与组件中写法一致
 
-# 配置路由的两种方式：配置路由的对象中的name属性一般与引入的页面同名，name中的内容相当于给该组件起的名字
+# 配置路由的两种方式：
+配置路由的对象中的name属性一般与引入的页面同名，name中的内容相当于给该组件起的名字
+另一种给组件起名字的方法是在vue文件的内部 
+export default {
+        name：'该页面的名字————组件名'
+}
+起name是为了防止使用vue工具时组件显示是匿名组件，从而不易观察现象
 路径一般都是小写，name属性值一般与vue文件名一致，且首字母大写
 （1）
 import Lxcmainpage from '../views/Lxcmainpage.vue'
@@ -365,3 +378,32 @@ const store = createStore({
 
 store.state.a // -> moduleA 的状态
 store.state.b // -> moduleB 的状态
+
+# 组件引用
+import ComHeader from '../src/components/ComHeader'
+import ComFooter from '@/components/ComFooter'——————@则表示src文件夹
+写完组件中内容，将组件引用至需要使用组件的页面，注册后再调用
+
+template标签内部的div在header和footer中可以直接写<header></header><footer></footer>
+
+<router-link to="/">内容</router-link>不写路径时，只写<router-link>剧集</router-link>时，内容不会显示在浏览器中
+
+# vue中也用来发送ajax请求的有一个vue-axios
+去axios官网找到它，在项目中安装并根据官网指示配置
+Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js中
+发送get请求最方便的方法：
+this.axios.get(api).then((response) => {
+  console.log(response.data)
+})
+
+# 处理跨域问题的远程服务器代理：JsonBird
+解决完跨域的问题，图片依旧跨域，可使用专门处理图片跨域的前缀：'https://images.weserv.nl/?url=' + 图片的地址
+
+# 使用其他人写好的组件记得安装配置后再使用
+
+# 使用element ui(组件库)
+使用前需要先安装：npm i element-ui -S
+使用：使用引入的方法Element，在main.js文件中配置
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
