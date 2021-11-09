@@ -12,5 +12,6 @@ console.log("end.");
 
 
 /* 2.同步方式 */
- var res = fs.readFileSync("4-(1)file.txt", "utf-8");
- console.log(res);
+var res = fs.readFileSync("4-(1)file.txt", "utf-8");
+console.log(res);
+

@@ -39,6 +39,7 @@
                 }, 500);
             })
         }
+        /* async用于申明一个function是异步的，而await用于等待一个异步方法执行完成，await后面必须返回一个对象 */
         async function fn() {
             console.log('准备发送请求 1');
             let aa = await request1();//等待异步请求结束后再执行下一步
