@@ -9,6 +9,11 @@
   "author": "LXC",
   "license": "ISC",
   "dependencies": {
-    "koa": "^2.13.4"
+    "@koa/router": "^10.1.1",
+    "ejs": "^3.1.6",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-session": "^6.2.0",
+    "koa-views": "^7.0.2"
   }
 }
