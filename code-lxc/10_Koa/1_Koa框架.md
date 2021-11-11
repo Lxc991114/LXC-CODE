@@ -103,8 +103,13 @@ npm install --save ejs
 --save就是会将这个包保存到package.json中，如果有一天不小心删除了node_modules文件夹，使用npm i，就会检测package.json中的包，并进行重新安装
 但是node的10版本以后安装的包默认就会将包名加进package.json中，不需要再写--save
 （3）ejs文件中也是html的结构，但是要在其中写非html、css、js的语法，html就无法解析那些内容了，因此需要更改扩展名
+esj文件中的js代码(<% %>内的内容是后端js，前端js需要写在script标签内，ejs文件中也可以有style标签)
 
 ## koa-session中间件
 session：会话作用域————打开浏览器开始关闭浏览器结束，只要不关闭浏览器，不手动清除会话里面的东西，就一直有效
 request：请求作用域————客户端向服务器发送请求的一瞬间，在request里面可以存东西，服务器端从其中通过ctx.request.属性给它接过来
+
+## koa-static中间件
+配置:app.use(serve(__dirname + '/public'));//当前项目在电脑上的绝对路径和项目下静态资源的路径进行拼接
+假如想在某个ejs文件中找到images文件下的某个图片: <img src="/images/xxx" alt="">
 
