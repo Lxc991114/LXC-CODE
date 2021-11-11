@@ -107,3 +107,4 @@ npm install --save ejs
 ## koa-session中间件
 session：会话作用域————打开浏览器开始关闭浏览器结束，只要不关闭浏览器，不手动清除会话里面的东西，就一直有效
 request：请求作用域————客户端向服务器发送请求的一瞬间，在request里面可以存东西，服务器端从其中通过ctx.request.属性给它接过来
+
