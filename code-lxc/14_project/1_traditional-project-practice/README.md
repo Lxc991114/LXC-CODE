@@ -46,3 +46,15 @@ app
 # 片段代码的处理
 将共有的部分的body内的内容(不是整个html结构)存到nav.ejs中
 在别的ejs文件中引入的时候，将其当作变量引入: <%- include('nav') %>
+
+# 配置子路由
+router/index.js文件中：
+const user = require("./user");
+const blog = require("./blog");
+
+router.use('/user', user.routes(), user.allowedMethods())
+router.use('/blog', blog.routes(), blog.allowedMethods())
+router/user.js文件、router/blog.js文件中：进行相关操作即可
+配置子路由后访问路径发生变化，例如http://localhost:3000/user/login
+记得要把登录和注册页面ejs文件的post请求的路径也加上前缀
+因为其路由表中路由已经修改
