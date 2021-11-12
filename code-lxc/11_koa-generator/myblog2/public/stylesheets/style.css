@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul{
+  list-style: none;
+}
+
+.wrap{
+  width: 1200px;
+  margin: 0 auto;
+}
+/* header start */
+header{
+  background-color: rgb(202, 10, 106);
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .logo{
+  margin-left: 20px;
+}
+header .user-info{
+  margin-right: 20px;
+  display: flex;
+}
+
+header .user-info li{
+  padding: 0 10px;
+}
+/* header end */
+
+/* content start */
+.content{
+  text-align: center;
+}
+.content h1{
+  margin-top: 10px;
+}
+.content form{
+  /* form自身就是块元素占一行，margin：50px auto对其没作用，手动加个宽 */
+  width: 300px;
+  margin: 30px auto;
+  background-color: rgb(89, 249, 255);
+  border-radius: 8px;
+}
+/* content end */

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <%-include('header')%>
+        <div class="content">
+            <div class="blog-list">
+                <% blogs.forEach(function(blog){ %>
+                <div class="blog-box">
+                    <h2 class="blog-title">
+                        <%=blog.title%>
+                    </h2>
+                    <div class="blog-content">
+                        <%=blog.content%>
+                    </div>
+                    <div class="other-info">
+                        <span class="post-time">
+                            <%=blog.post_time%>
+                        </span>
+                        <span class="read-count">
+                            <%=blog.read_count%> 阅读
+                        </span>
+                        <span class="username">
+                            <%=blog.username%>
+                        </span>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
