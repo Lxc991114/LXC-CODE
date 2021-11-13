@@ -31,5 +31,40 @@ module.exports = {
             categories,
             username
         });
+    },
+    detail: async (ctx) => {
+        // 1. 接数据
+        let blogId = ctx.params.blogId;
+        // 2. 查文章
+        let res = await blogModel.getBlogById(blogId)
+        // 3.查文章评论
+        let comments = await blogModel.getCommentsByBlogId(blogId)
+        let username = ctx.session.username;
+        if (res.length > 0) {
+            await ctx.render('blog-detail', {
+                blog: res[0],
+                comments,
+                username
+            });
+        }
+    },
+
+    postComment: async (ctx) => {
+        //koa-bodyparser中间件是用来接收post请求的参数的中间件，因此axios发送的post请求的参数也如此接
+        let comment = ctx.request.body;  //{ content: '', blog_id:9 }//结果来的属性和数据库中属性一致，可以直接往数据库里存
+        let userId = ctx.session.userId;
+        if (userId) {
+            comment.user_id = userId;//如果登录了就将用户id存到评论信息的对象中，好直接放入数据库
+            let res = await blogModel.saveComment(comment);
+            if (res.affectedRows > 0) {
+                /* 这处和下面不可以用ctx.render()，因为是异步的，页面根本没跳转，只是服务器响应给客户端的简单信息，在浏览器的response中 */
+                ctx.body = 'success';
+            } else {
+                ctx.body = 'fail'
+            }
+        } else {
+            ctx.body = '未登录'
+        }
+
     }
 }

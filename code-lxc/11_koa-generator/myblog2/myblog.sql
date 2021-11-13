@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 12/11/2021 20:19:41
+ Date: 13/11/2021 23:32:30
 */
 
 SET NAMES utf8mb4;
@@ -33,15 +33,15 @@ CREATE TABLE `t_blog`  (
   PRIMARY KEY (`blog_id`) USING BTREE,
   INDEX `user_blog_user_id_fk`(`user_id`) USING BTREE,
   INDEX `category_blog_cate_id_fk`(`cate_id`) USING BTREE,
-  CONSTRAINT `category_blog_cate_id_fk` FOREIGN KEY (`cate_id`) REFERENCES `t_catgory` (`cate_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `category_blog_cate_id_fk` FOREIGN KEY (`cate_id`) REFERENCES `t_category` (`cate_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_blog_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for t_catgory
+-- Table structure for t_category
 -- ----------------------------
-DROP TABLE IF EXISTS `t_catgory`;
-CREATE TABLE `t_catgory`  (
+DROP TABLE IF EXISTS `t_category`;
+CREATE TABLE `t_category`  (
   `cate_id` int(11) NOT NULL,
   `cate_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '分类名称',
   PRIMARY KEY (`cate_id`) USING BTREE
@@ -62,7 +62,7 @@ CREATE TABLE `t_comment`  (
   INDEX `blog_comment_blog_id_fk`(`blog_id`) USING BTREE,
   CONSTRAINT `blog_comment_blog_id_fk` FOREIGN KEY (`blog_id`) REFERENCES `t_blog` (`blog_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_comment_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for t_user
