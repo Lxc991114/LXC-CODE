@@ -44,6 +44,10 @@ module.exports = {
         //4.根据查询结果响应页面
         if(res.length>0){
             ctx.session.username = user.username;
+            /* 此处将用户id也存进session，便于后续存文章时不通过用户将用户的id存进用户文章的表中
+               如果不进行此操作，由于getBlogs()方法中where条件的限制，新写入的文章没有用户id，从而不会显示在文章列表中
+            */
+            ctx.session.userId = res[0].user_id;
             ctx.redirect('/')
         }else{
             await ctx.render('error',{

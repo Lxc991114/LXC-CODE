@@ -4,11 +4,22 @@
 }
 .blog-box{
     margin-top: 20px;
-    width: 800px;
     padding: 20px;
     height: 220px;
     background: #ccc;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+.blog-box:first-child{/* 给第一个的上外边距设成0 */
+    margin-top: 0;
+}
+.sidebar{
+    width: 220px;
+    height: 150px;
+    background-color: rgb(255, 160, 234);
+}
+.blog-list{
+      flex: 1;/* 自适应 */
+      margin-right: 20px;
 }

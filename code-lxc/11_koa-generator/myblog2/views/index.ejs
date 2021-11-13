@@ -27,17 +27,40 @@
                             <%=blog.post_time%>
                         </span>
                         <span class="read-count">
-                            <%=blog.read_count%> 阅读
+                            <%=blog.read_count%>阅读量
                         </span>
                         <span class="username">
-                            <%=blog.username%>
+                           作者:<%=blog.username%>
                         </span>
                     </div>
                 </div>
                 <% }) %>
             </div>
+            <div class="sidebar">
+                <div class="btns">
+                    <button id="btn-post">发表文章</button>
+                </div>
+                <div class="blog-cates">
+                    <h2>文章分类</h2>
+                    <ul class="category-list">
+                        <%
+                            categories.forEach(function(category){
+                        %>
+                        <li><a href="/?cateId=<%=category.cate_id%>"><%=category.cate_name%></a></li>
+                        <%
+                            });
+                        %>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+        let btnPost = document.querySelector('#btn-post');
+        btnPost.addEventListener('click', function(){
+            location.href= '/blog/post';
+        }, false);
+    </script>
 
 </body>
 

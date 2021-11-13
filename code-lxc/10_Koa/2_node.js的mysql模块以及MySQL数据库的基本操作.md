@@ -60,3 +60,15 @@ a.加了外键的限制，删除父表中信息，子表不让，如果就是想
 # 数据库标准语句
 （1）select * from t_user where username='lisi' and pass='123456
 （2）insert into t_user(name,pass,tel) valuse('lisi','1231243','25468721676')
+
+# 数据库的多表查询
+（1）一对多的情况下，经常会使用多表关联查询
+（2）例如通过文章表把用户表关联起来，通过文章表把用户表的用户名查询出来：
+select blog_id,title,content,post_time,read_count,username from t_blog,t_user
+如果想查user_id
+select blog_id,title,content,post_time,read_count,username,user_id from t_blog,t_user——————报错
+因为两张表中有同名字段，不知道该查哪张表的字段
+所以起别名，说明是哪个表最好
+select blog.blog_id, blog.title , blog.content , blog.post_time , blog.read_count , usr.username , usr.user_id from t_blog blog,t_user usr——————查询不报错，但是数据出了问题，出现了笛卡尔积效应，查询结果数是两个表数据的乘积【如果有N张表关联查询，省略了where条件，会发生笛卡尔积】
+（3）如果有N张表进行关联查询，至少要有N-1的关联条件
+select blog.blog_id, blog.title , blog.content , blog.post_time , blog.read_count , usr.username , usr.user_id from t_blog blog,t_user usr where blog.user_id = usr.user_id————外键查询的条件写出来(不可少，少了就会出现笛卡尔积)，查询结果正常，如果后面还有限定条件，直接在后面and即可

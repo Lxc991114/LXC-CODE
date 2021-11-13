@@ -37,3 +37,46 @@ router.get('/', async (ctx) => {
 })————————————————————不退出浏览器时，直接进入地址也可以看到欢迎xxx
 上面也不需要用render函数了，应该用redirect函数跳转路由
 跳转到‘/’路由时，会执行查看是否有username的操作，且路由也会变成主页的路由
+
+# 
+index控制器文件中：
+index: async (ctx) => {
+        //1.查询文章
+        let blogs = await blogModel.getBlogs()
+        //2.查询分类
+        let categories = await blogModel.getBlogCategories();
+        let uname = ctx.session.username;
+        await ctx.render("index", {
+          username: uname,
+          blogs,
+          categories
+        });
+    }
+blogs控制器文件中：
+ listBlogsByCate: async (ctx)=>{
+        //1.接数据
+        let cateId = ctx.params.cateId
+        //2.查数据库
+        let blogs = await blogModel.getBlogsByCateId(cateId)
+        let uname = ctx.session.username;
+        await ctx.render('index',{————————往首页跳转这三个参数一个也不能少，但是只要blogs，而没有其他两个参数
+            username:uname,————————从session中获取
+            blogs,——————————刚才查询出来的文章
+            categories——————————如何获取？————————如果再查一遍放在这有点麻烦
+        })
+    }
+}
+两处代码有大量雷同，个别位置有区别渲染主页的参数要是更改，都需要更改：变化的位置不要写死，通过参数传过来
+getBlogs()、getBlogCategories()方法也没什么区别，可以合并成一个
+listBlogsByCate方法也可以不写，还是进到跟路由中去处理该操作
+
+# 
+（1）<li><a href="/<%=category.cate_id%>"><%=category.cate_name%></a></li>
+接收信息：let cateId = ctx.params.cateId;
+/* router.get('/:cateId', welcome.index)————————如果命名方式，不传参则匹配不到路由，会出错*/
+（2）<li><a href="/?cateId=<%=category.cate_id%>"><%=category.cate_name%></a></li>
+接收信息：let cateId = ctx.query.cateId;
+/* router.get('/', welcome.index)————————不会出错*/
+
+# <option value="真正要提交的东西">给用户看的内容</option>
+例如：<option value="<%=category.id%>"><%=category.cate_name%></option>
